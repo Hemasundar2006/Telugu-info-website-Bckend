@@ -76,6 +76,9 @@ const jobPostSchema = new mongoose.Schema({
     type : Boolean,
     default : false
    },
+   pdfLink: {
+    type : String
+   },
    isActive : {
     type : Boolean,
     default : false
