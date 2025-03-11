@@ -26,7 +26,7 @@ router.get("/all-jobPost", async (req, res) => {
 });
 
 
-router.get('get-jobPost/:id', async (req, res) => {
+router.get('/get-jobPost/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const jobPost = await jobPostDB.findById(id);

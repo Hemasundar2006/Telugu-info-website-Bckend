@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
         type : String,
         enum : ["male", "female"]
     },
+    password : {
+        type : String,
+        required : true
+    },
     isDeleted : {
         type : Boolean,
         default : false
