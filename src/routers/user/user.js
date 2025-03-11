@@ -16,10 +16,10 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ Success : false , message : 'User already exists please log in' });
         }
 
+        data.password = await bcrypt.hash(data.password, saltRounds);
+
         // Create new user
         const document = new userDB(data);
-
-        data.password = await bcrypt.hash(data.password, saltRounds);
 
         // Save user to database
         await document.save();
@@ -27,7 +27,7 @@ router.post('/register', async (req, res) => {
 
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        return res.status(500).json({ success : false , message : err.message });
     }
 });
 
@@ -41,6 +41,10 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ success: false, message: 'User not Found' });
         }
 
+        console.log(user,"3");
+
+        console.log(user.password, "1");
+
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.status(400).json({ success: false, message: 'Invalid credentials' });
@@ -49,7 +53,7 @@ router.post('/login', async (req, res) => {
         return res.status(200).json({ success: true, data: user });
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        return res.status(500).json({ success: false, message: err.message });
     }
 });
 

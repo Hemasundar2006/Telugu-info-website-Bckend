@@ -5,7 +5,7 @@ const mainRouter = require("./src/routers/router");
 const https = require("https");
 var cors = require("cors");
 
-var PORT = process.env.PORT || 4000;
+var PORT = process.env.PORT || 3000;
 connectdb();
 const app = express();
 const server = require("http").createServer(app);
