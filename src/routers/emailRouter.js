@@ -11,10 +11,12 @@ const validateEmail = (email) => {
 // Route to handle newsletter subscriptions
 router.post('/newsletter/subscribe', async (req, res) => {
     try {
+        console.log('Received subscription request:', req.body);
         const { email } = req.body;
 
         // Validate email
         if (!email) {
+            console.log('Email missing in request');
             return res.status(400).json({
                 success: false,
                 message: 'Email is required'
@@ -23,6 +25,7 @@ router.post('/newsletter/subscribe', async (req, res) => {
 
         // Validate email format
         if (!validateEmail(email)) {
+            console.log('Invalid email format:', email);
             return res.status(400).json({
                 success: false,
                 message: 'Invalid email format'
@@ -49,14 +52,17 @@ router.post('/newsletter/subscribe', async (req, res) => {
             </div>
         `;
 
+        console.log('Attempting to send subscription email to:', email);
         const result = await sendEmail(email, subject, text, html);
 
         if (result.success) {
+            console.log('Subscription email sent successfully to:', email);
             res.status(200).json({
                 success: true,
                 message: 'Subscription confirmation sent successfully'
             });
         } else {
+            console.error('Failed to send subscription email:', result.error);
             res.status(500).json({
                 success: false,
                 message: 'Failed to send subscription confirmation',
@@ -64,6 +70,7 @@ router.post('/newsletter/subscribe', async (req, res) => {
             });
         }
     } catch (error) {
+        console.error('Unexpected error in newsletter subscription:', error);
         res.status(500).json({
             success: false,
             message: 'Internal server error',
