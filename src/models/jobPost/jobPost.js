@@ -12,7 +12,7 @@ const jobPostSchema = new mongoose.Schema({
     jobType : {
         type : String,
         enum : ["fullTime", "partTime", "contract-based", "temporary"],
-        default : fullTime
+        default : "fullTime"
     },
     location : {
         type : String,
