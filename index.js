@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const connectdb = require("./src/config/db");
 const mainRouter = require("./src/routers/router");
+const emailRouter = require("./src/routers/emailRouter");
 const https = require("https");
 var cors = require("cors");
 
@@ -9,8 +10,6 @@ var PORT = process.env.PORT || 4000;
 connectdb();
 const app = express();
 const server = require("http").createServer(app);
-
-
 
 app.use(cors());
 app.use(function (req, res, next) {
@@ -24,15 +23,14 @@ app.use(function (req, res, next) {
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
 
-
-
 // parse application/json
 app.use(express.json());
 app.use("/api", mainRouter);
+app.use("/api/email", emailRouter);
 
 // azureOpenAi();
 // openAiWithAzureKeys();
 
 server.listen(PORT, () => {
-  console.log(`app running on portt ${PORT}`);
+  console.log(`app running on port ${PORT}`);
 });
