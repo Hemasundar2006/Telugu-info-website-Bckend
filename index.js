@@ -4,21 +4,23 @@ const connectdb = require("./src/config/db");
 const mainRouter = require("./src/routers/router");
 const emailRouter = require("./src/routers/emailRouter");
 const https = require("https");
-var cors = require("cors");
+const cors = require('cors');
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 4000;
 connectdb();
 const app = express();
 const server = require("http").createServer(app);
 
-app.use(cors());
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
-  next();
-});
+// CORS configuration
+const corsOptions = {
+    origin: ['http://localhost:3000', 'https://telugu-info-website.vercel.app'], // Add your frontend URLs
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
@@ -31,6 +33,16 @@ app.use("/api/email", emailRouter);
 // azureOpenAi();
 // openAiWithAzureKeys();
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Global error handler:', err);
+    res.status(500).json({
+        success: false,
+        message: 'Internal server error',
+        error: err.message
+    });
+});
+
 server.listen(PORT, () => {
-  console.log(`app running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
