@@ -11,16 +11,21 @@ connectdb();
 const app = express();
 const server = require("http").createServer(app);
 
-// CORS configuration
-const corsOptions = {
-    origin: ['http://localhost:3000', 'https://telugu-info-website.vercel.app'], // Add your frontend URLs
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-};
+// Enable CORS for all routes
+app.use(cors());
 
-// Apply CORS middleware
-app.use(cors(corsOptions));
+// Add headers middleware
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200);
+    }
+    next();
+});
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
@@ -44,5 +49,5 @@ app.use((err, req, res, next) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
