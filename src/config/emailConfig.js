@@ -9,11 +9,14 @@ if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
 
 // Create a transporter object with production settings
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
+  service: "Gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
 // Verify transporter configuration
