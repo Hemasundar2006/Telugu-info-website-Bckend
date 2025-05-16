@@ -3,7 +3,7 @@ require("dotenv").config();
 const connectdb = require("./src/config/db");
 const mainRouter = require("./src/routers/router");
 const emailRouter = require("./src/routers/emailRouter");
-const https = require("https");
+const http = require("http");
 const cors = require('cors');
 
 var PORT = process.env.PORT || 4000;
