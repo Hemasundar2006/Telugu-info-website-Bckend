@@ -12,9 +12,7 @@ const app = express();
 const server = require("http").createServer(app);
 
 // Enable CORS for all routes
-app.use(cors({
-    origin: ['http://localhost:5173', 'https://your-production-url.com']
-}));
+app.use(cors());
 
 // Add headers middleware
 app.use((req, res, next) => {
