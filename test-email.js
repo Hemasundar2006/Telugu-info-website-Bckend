@@ -7,7 +7,7 @@ async function testEmail() {
     console.log('\nTest Case 1: Basic email');
     try {
         const result = await sendEmail(
-            'user@example.com',
+            'marotinani06@gmail.com',
             'Thank You for subscribing to Telugu Info Website',
             'Thank you for subscribing to Telugu Info Website. We are excited to have you on board!',
             '<h1>Thank You for subscribing to Telugu Info Website</h1><p>Thank you for subscribing to Telugu Info Website. We are excited to have you on board!</p>'
