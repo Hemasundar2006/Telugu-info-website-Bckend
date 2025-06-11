@@ -12,20 +12,12 @@ const app = express();
 const server = require("http").createServer(app);
 
 // Enable CORS for all routes
-app.use(cors());
-
-// Add headers middleware
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    
-    // Handle preflight requests
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-    next();
-});
+app.use(cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
