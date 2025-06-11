@@ -13,17 +13,23 @@ const server = require("http").createServer(app);
 
 // Enable CORS for all routes
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Replace with your frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    origin: '*', // Allow all origins during development
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    credentials: true,
+    maxAge: 86400 // 24 hours
 }));
 
-// parse application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: false }));
+// Handle preflight requests
+app.options('*', cors());
 
-// parse application/json
+// Parse JSON bodies
 app.use(express.json());
+
+// Parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/api", mainRouter);
 app.use("/api/email", emailRouter);
 
@@ -32,11 +38,11 @@ app.use("/api/email", emailRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error('Global error handler:', err);
+    console.error(err.stack);
     res.status(500).json({
         success: false,
-        message: 'Internal server error',
-        error: err.message
+        message: 'Something went wrong!',
+        error: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
 });
 
