@@ -45,65 +45,102 @@ async function testEmail() {
         'notforuse982@gmail.com',
         'hiteshganni007@gmail.com',
         'sam0cypher@gmail.com',
-        'kiransomulakiran@gmail.com'
+        'kiransomulakiran@gmail.com',
+        'jayashreenaidu04@gmail.com',
+        'manichindiri@gmail.com',
+        'magesh12092004@gmail.com',
+        'vajjathanuja@gmail.com',
+        'himahasini.kallepalli@gmail.com',
+        'gowthamkalahasti@gmail.com',
+        'nadimintihemalatha7@gmail.com',
+        'sudarsanpalavalasa@gmail.com',
+        'mahalakshmikonna365@gmail.com',
+        'saichandubondala9177@gmail.com',
+        '21065chb@gmail.com',
+        
     ];
 
     console.log(`Sending SSC CGL notification emails to ${recipients.length} recipients...`);
 
     // Email content
-    const subject = 'SSC CGL 2025 Notification Released - Apply Now!';
-    const text = 'SSC CGL 2025 Exam Details\n\nOverview:\n- Exam Level: National level\n- Exam Frequency: Once a year\n- Category: Government Jobs\n- Eligibility: Bachelor\'s degree from a recognised University\n- Age-Limit: 18 to 32 years (as on August 1, 2025)\n- Exam Mode: Computer-Based Test (CBT)\n- Exam Language: English and Hindi\n- Application Fee: INR 100\n- Total Vacancies: 14,582\n\nImportant Dates:\n- Notification Released: 22-Apr-2025 to 09-Jun-2025\n- Application Start Date: 22-Apr-2025\n- Application End Date: 21-May-2025 to 04-Jul-2025\n- Tier 1 Exam Dates: 13-Aug-2025 to 30-Aug-2025\n- Tier 2 Exam Dates: October/November 2025\n\nFor more details and to apply, visit: http://ssc.gov.in/\n\nStay updated with our WhatsApp Channel:\nhttps://whatsapp.com/channel/0029Va9UwjB6HXUNjS0Sf43L\n\nBest regards,\nThe Telugu Info Team';
-    
-    const html = '<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">' +
-        '<h1 style="color: #2c3e50; text-align: center;">SSC CGL 2025</h1>' +
-        '<h2 style="color: #34495e; text-align: center;">Staff Selection Commission Combined Graduate Level</h2>' +
-        
-        '<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">' +
-        '<h3 style="color: #2c3e50; margin-top: 0;">📋 Overview</h3>' +
-        '<table style="width: 100%; border-collapse: collapse; margin: 15px 0;">' +
-        '<tr style="background-color: #e9ecef;"><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Exam Level</th><td style="padding: 10px; border: 1px solid #dee2e6;">National level</td></tr>' +
-        '<tr><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Exam Frequency</th><td style="padding: 10px; border: 1px solid #dee2e6;">Once a year</td></tr>' +
-        '<tr style="background-color: #e9ecef;"><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Category</th><td style="padding: 10px; border: 1px solid #dee2e6;">Government Jobs</td></tr>' +
-        '<tr><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Eligibility</th><td style="padding: 10px; border: 1px solid #dee2e6;">Bachelor\'s degree from a recognised University</td></tr>' +
-        '<tr style="background-color: #e9ecef;"><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Age-Limit</th><td style="padding: 10px; border: 1px solid #dee2e6;">18 to 32 years (as on August 1, 2025)</td></tr>' +
-        '<tr><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Vacancies</th><td style="padding: 10px; border: 1px solid #dee2e6;">14,582</td></tr>' +
-        '</table>' +
-        '</div>' +
-        
-        '<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">' +
-        '<h3 style="color: #2c3e50; margin-top: 0;">📅 Important Dates</h3>' +
-        '<table style="width: 100%; border-collapse: collapse; margin: 15px 0;">' +
-        '<tr style="background-color: #e9ecef;"><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Notification Released</th><td style="padding: 10px; border: 1px solid #dee2e6;">22-Apr-2025 to 09-Jun-2025</td></tr>' +
-        '<tr><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Application Start Date</th><td style="padding: 10px; border: 1px solid #dee2e6;">22-Apr-2025</td></tr>' +
-        '<tr style="background-color: #e9ecef;"><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Application End Date</th><td style="padding: 10px; border: 1px solid #dee2e6;">21-May-2025 to 04-Jul-2025</td></tr>' +
-        '<tr><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Tier 1 Exam Dates</th><td style="padding: 10px; border: 1px solid #dee2e6;">13-Aug-2025 to 30-Aug-2025</td></tr>' +
-        '<tr style="background-color: #e9ecef;"><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Tier 2 Exam Dates</th><td style="padding: 10px; border: 1px solid #dee2e6;">October/November 2025</td></tr>' +
-        '</table>' +
-        '</div>' +
-        
-        '<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">' +
-        '<h3 style="color: #2c3e50; margin-top: 0;">⏱️ Exam Duration</h3>' +
-        '<table style="width: 100%; border-collapse: collapse; margin: 15px 0;">' +
-        '<tr style="background-color: #e9ecef;"><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Tier-I</th><td style="padding: 10px; border: 1px solid #dee2e6;">60 minutes (online)</td></tr>' +
-        '<tr><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Tier-II Paper 1</th><td style="padding: 10px; border: 1px solid #dee2e6;">150 minutes</td></tr>' +
-        '<tr style="background-color: #e9ecef;"><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Tier-II Paper 2</th><td style="padding: 10px; border: 1px solid #dee2e6;">120 minutes</td></tr>' +
-        '<tr><th style="padding: 10px; text-align: left; border: 1px solid #dee2e6;">Tier-II Paper 3</th><td style="padding: 10px; border: 1px solid #dee2e6;">120 minutes</td></tr>' +
-        '</table>' +
-        '</div>' +
-        
-        '<div style="text-align: center; margin: 30px 0;">' +
-        '<a href="http://ssc.gov.in/" style="background-color: #007bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold;">Apply Now →</a>' +
-        '</div>' +
-        
-        '<div style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0;">' +
-        '<h3 style="color: #2c3e50; margin-top: 0;">📱 Stay Updated</h3>' +
-        '<p style="font-size: 16px; line-height: 1.6;">Join our WhatsApp Channel to receive instant updates about exam notifications and important dates:</p>' +
-        '<p style="font-size: 16px; line-height: 1.6;"><a href="https://whatsapp.com/channel/0029Va9UwjB6HXUNjS0Sf43L" style="background-color: #25D366; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Join WhatsApp Channel →</a></p>' +
-        '</div>' +
-        
-        '<p style="font-size: 14px; color: #6c757d; font-style: italic;">Note: The above dates are tentative and will be updated after the official notification.</p>' +
-        '<p style="font-size: 16px; line-height: 1.6;">Best regards,<br>The Telugu Info Team</p>' +
-        '</div>';
+    const subject = 'YOKOGAWA Recruitment Drive 2025 – Diploma Trainee Engineer | 3 LPA | Apply Now';
+    const text = 'Dear Candidate,\n\n' +
+        'We are excited to announce the YOKOGAWA Recruitment Drive 2025 for the position of Diploma Trainee Engineer. This opportunity is brought to you by the Department of Technical Education, Government of Andhra Pradesh.\n\n' +
+        'Position: Diploma Trainee Engineer\n' +
+        'Salary: 3 LPA\n' +
+        'Job Location: Bangalore\n' +
+        'Last Date for Registration: 19-06-2025\n\n' +
+        'Eligibility:\n' +
+        '- 2025 pass outs of Diploma in DECE, DEEE, or DAEIE\n' +
+        '- Minimum 60% in academics from SSC onwards with no active backlogs\n\n' +
+        'Benefits:\n' +
+        '- Free Transportation\n' +
+        '- Medical Insurance\n' +
+        '- Subsidized Cafeteria Meals\n' +
+        '- On-site opportunities in Japan\n' +
+        '- Japanese Language Training\n\n' +
+        'Selection Process:\n' +
+        '- Online Assessment (Technical)\n' +
+        '- Technical Interview & HR Interview\n' +
+        '- Issue of Offer Letter\n\n' +
+        'Service Agreement:\n' +
+        'Bond period of 3 years (If you leave within 3 years, a recovery of ₹2,00,000 applies)\n\n' +
+        'How to Apply:\n' +
+        'Interested and eligible candidates can apply using the link below:\n' +
+        'Apply Here: https://docs.google.com/forms/d/e/1FAIpQLSfHpwV6rm3aP8FljXr-SrveHyCskV4_BtMKIO8UYwXsLhDX1Q/viewform?usp=send_form\n\n' +
+        'Note:\n' +
+        'Only students who are committed to joining after selection should apply.\n\n' +
+        'For more details, please refer to the official notification or contact your Training & Placement Cell.\n\n' +
+        'Best wishes,\n' +
+        'Training & Placement Cell\n' +
+        'Department of Technical Education\n' +
+        'Government of Andhra Pradesh';
+
+    const html = `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #f9f9f9; border-radius: 8px;">
+      <h2 style="color: #003366; text-align: center; margin-bottom: 0;">YOKOGAWA Recruitment Drive 2025</h2>
+      <h3 style="color: #ff9900; text-align: center; margin-top: 8px;">Diploma Trainee Engineer | 3 LPA</h3>
+      <p style="font-size: 16px; color: #222;">
+        <strong>Dear Candidate,</strong><br><br>
+        We are excited to announce the <b>YOKOGAWA Recruitment Drive 2025</b> for the position of <b>Diploma Trainee Engineer</b>. This opportunity is brought to you by the Department of Technical Education, Government of Andhra Pradesh.
+      </p>
+      <ul style="font-size: 15px; color: #333; line-height: 1.7;">
+        <li><b>Position:</b> Diploma Trainee Engineer</li>
+        <li><b>Salary:</b> 3 LPA</li>
+        <li><b>Job Location:</b> Bangalore</li>
+        <li><b>Last Date for Registration:</b> 19-06-2025</li>
+      </ul>
+      <h4 style="color: #1976d2; margin-bottom: 4px;">Eligibility:</h4>
+      <ul style="font-size: 15px; color: #333;">
+        <li>2025 pass outs of Diploma in DECE, DEEE, or DAEIE</li>
+        <li>Minimum 60% in academics from SSC onwards with no active backlogs</li>
+      </ul>
+      <h4 style="color: #1976d2; margin-bottom: 4px;">Benefits:</h4>
+      <ul style="font-size: 15px; color: #333;">
+        <li>Free Transportation</li>
+        <li>Medical Insurance</li>
+        <li>Subsidized Cafeteria Meals</li>
+        <li>On-site opportunities in Japan</li>
+        <li>Japanese Language Training</li>
+      </ul>
+      <h4 style="color: #1976d2; margin-bottom: 4px;">Selection Process:</h4>
+      <ul style="font-size: 15px; color: #333;">
+        <li>Online Assessment (Technical)</li>
+        <li>Technical Interview & HR Interview</li>
+        <li>Issue of Offer Letter</li>
+      </ul>
+      <h4 style="color: #1976d2; margin-bottom: 4px;">Service Agreement:</h4>
+      <ul style="font-size: 15px; color: #333;">
+        <li>Bond period of 3 years (If you leave within 3 years, a recovery of ₹2,00,000 applies)</li>
+      </ul>
+      <h4 style="color: #1976d2; margin-bottom: 4px;">How to Apply:</h4>
+      <p style="font-size: 15px; color: #333;">Interested and eligible candidates can apply using the link below:</p>
+      <div style="text-align: center; margin: 24px 0;">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfHpwV6rm3aP8FljXr-SrveHyCskV4_BtMKIO8UYwXsLhDX1Q/viewform?usp=send_form" style="background-color: #388e3c; color: white; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-size: 18px; font-weight: bold; display: inline-block;">Apply Here</a>
+      </div>
+      <p style="font-size: 15px; color: #d32f2f;"><b>Note:</b> Only students who are committed to joining after selection should apply.</p>
+      <p style="font-size: 15px; color: #333;">For more details, please refer to the official notification or contact your Training & Placement Cell.</p>
+      <p style="font-size: 16px; line-height: 1.6;">Best wishes,<br>Training & Placement Cell<br>Department of Technical Education<br>Government of Andhra Pradesh</p>
+    </div>`;
 
     // Send emails to all recipients
     let successCount = 0;
