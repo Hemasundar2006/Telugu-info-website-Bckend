@@ -5,7 +5,7 @@ async function testEmail() {
     
     // List of email recipients
     const recipients = [
-        'marotinani06@gmail.com',
+      'marotinani06@gmail.com',
         'nadimintihemalatha96@gmail.com',
         'hemasaiamujuri3@gmail.com',
         'marothihemasundar03@gmail.com',
@@ -56,11 +56,21 @@ async function testEmail() {
         'sudarsanpalavalasa@gmail.com',
         'mahalakshmikonna365@gmail.com',
         'saichandubondala9177@gmail.com',
-        '21065chb@gmail.com'
-        ,
+        '21065chb@gmail.com',
+        'saitrinadhh@gmail.com',
+        'naveenallu.2008@gmail.com',
+        'harikagummadi360@gmail.com',
+        'lakshmivangapandu88@gmail.com',
+        'smilykingtejasaikumar@gmail.com',
+        'yamunathuta1@gmail.com',
+        'jyothsnapatnana@gmail.com',
+        'mahadevumatha@gmail.com',
+        'pogirihari617@gmail.com',
+        
+        
     ];
 
-    console.log(`Sending welcome emails to ${recipients.length} recipients...`);
+    console.log(`Sending welcome emails to  recipients...`);
 
     // Email content
     const subject = '🌟 We Value Your Feedback - Help Us Improve!';

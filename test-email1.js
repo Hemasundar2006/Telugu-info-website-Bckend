@@ -57,6 +57,15 @@ async function testEmail() {
         'mahalakshmikonna365@gmail.com',
         'saichandubondala9177@gmail.com',
         '21065chb@gmail.com',
+        'saitrinadhh@gmail.com',
+        'naveenallu.2008@gmail.com',
+        'harikagummadi360@gmail.com',
+        'lakshmivangapandu88@gmail.com',
+        'smilykingtejasaikumar@gmail.com',
+        'yamunathuta1@gmail.com',
+        'jyothsnapatnana@gmail.com',
+        'mahadevumatha@gmail.com', 
+        'pogirihari617@gmail.com',
     ];
 
     console.log(`Sending welcome emails to ${recipients.length} recipients...`);

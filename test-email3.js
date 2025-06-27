@@ -6,6 +6,66 @@ async function testEmail() {
     // List of email recipients
     const recipients = [
         'marotinani06@gmail.com',
+        'nadimintihemalatha96@gmail.com',
+        'hemasaiamujuri3@gmail.com',
+        'marothihemasundar03@gmail.com',
+        'gireeshpurli@gmail.com',
+        'krishnaballanki69@gmail.com',
+        'podugucharan95@gmail.com',
+        'madabatthulasravanthrakesh@gmail.com',
+        'krishnavenigadi11@gmail.com',
+        'crvcrv114@gmail.com',
+        'ganapathipanchireddy0@gmail.com',
+        'kumarlikhith27@gmail.com',
+        'bangarujoes@gmail.com',
+        'teja2626swar@gmail.com',
+        'pradeep@gmail.com',
+        'chintadaprasad12@gmail.com',
+        'sravyasrimusirana@gmail.com',
+        'sravankoncha@gmail.com',
+        'sathwik333chand@gmail.com',
+        'bandarumadhuri32@gmail.com',
+        'ponnanahema@gmail.com',
+        'rameshstudy1234@gmail.com',
+        'kundrapukumarswamy74@gmail.com',
+        'naravadilleswararao1315@gmail.com',
+        'podugucharan81@gmail.com',
+        'rajitha9410@gmail.com',
+        'sairutwik1123@gmail.com',
+        'adinigowthami@gmail.com',
+        'sutarisuchitra141@gmail.com',
+        'mohansivaram2007@gmail.com',
+        'narayanamurthykarnayana@gmail.com',
+        'hemasundarmaroti@gmail.com',
+        'hmmhmm@gmail.com',
+        'sadfsafd@gmail.com',
+        'shanmukharaoadapaka123@gmail.com',
+        'akashvenkat4454@gmail.com',
+        'tmgcewziubpoqwq@suiemail.com',
+        'notforuse982@gmail.com',
+        'hiteshganni007@gmail.com',
+        'sam0cypher@gmail.com',
+        'kiransomulakiran@gmail.com',
+        'jayashreenaidu04@gmail.com',
+        'manichindiri@gmail.com',
+        'magesh12092004@gmail.com',
+        'vajjathanuja@gmail.com',
+        'himahasini.kallepalli@gmail.com',
+        'gowthamkalahasti@gmail.com',
+        'nadimintihemalatha7@gmail.com',
+        'sudarsanpalavalasa@gmail.com',
+        'mahalakshmikonna365@gmail.com',
+        'saichandubondala9177@gmail.com',
+        '21065chb@gmail.com',
+        'saitrinadhh@gmail.com',
+        'naveenallu.2008@gmail.com',
+        'harikagummadi360@gmail.com',
+        'lakshmivangapandu88@gmail.com',
+        'smilykingtejasaikumar@gmail.com',
+        'yamunathuta1@gmail.com',
+        'jyothsnapatnana@gmail.com',
+        'mahadevumatha@gmail.com',
+        'pogirihari617@gmail.com',
     ];
 
     console.log(`Sending feedback request emails to ${recipients.length} recipients...`);
@@ -19,7 +79,7 @@ async function testEmail() {
         '1. How helpful are our weekly career tips?\n' +
         '2. Are the job opportunities relevant to your interests?\n' +
         '3. What topics would you like to see more of?\n\n' +
-        'Click here to share your feedback: http://localhost:3000/feedback.html\n\n' +
+        'Click here to share your feedback: https://docs.google.com/forms/d/e/1FAIpQLSd8m4VxV2NbQ-D_ZK2mRlq33e6AtiD_uSqu4-LJYHTHm93QOg/viewform?usp=sharing&ouid=101365593978952219255\n\n' +
         'Thank you for helping us serve you better!\n\n' +
         '— Telugu Info Team';
 
@@ -57,7 +117,7 @@ async function testEmail() {
           <p style="color: #333; margin: 0; font-weight: bold;">3. What topics would you like to see more of?</p>
         </div>
         <div style="text-align: center; margin-top: 20px;">
-          <a href="http://localhost:3000/feedback.html" style="display: inline-block; background: #4CAF50; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; margin: 10px 0;">Share Your Feedback</a>
+          <a href="https://forms.gle/y4ZXPBnbj3PppMs88" style="display: inline-block; background: #4CAF50; color: white; padding: 12px 30px; text-decoration: none; border-radius: 25px; font-weight: bold; margin: 10px 0;">Share Your Feedback</a>
         </div>
       </div>
 
@@ -74,7 +134,7 @@ async function testEmail() {
             <img src="https://img.icons8.com/color/48/000000/facebook-new.png" style="width: 32px; height: 32px;">
           </a>
         </div>
-        <p style="color: #666; font-size: 12px; margin-top: 20px;">© 2024 Telugu Info. All rights reserved.</p>
+        <p style="color: #666; font-size: 12px; margin-top: 20px;">© 2025 Telugu Info. All rights reserved.</p>
       </div>
     </div>`;
 

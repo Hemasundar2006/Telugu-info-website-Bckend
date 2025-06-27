@@ -57,90 +57,130 @@ async function testEmail() {
         'mahalakshmikonna365@gmail.com',
         'saichandubondala9177@gmail.com',
         '21065chb@gmail.com',
-        
+        'saitrinadhh@gmail.com',
+        'naveenallu.2008@gmail.com',
+        'harikagummadi360@gmail.com',
+        'lakshmivangapandu88@gmail.com',
+        'smilykingtejasaikumar@gmail.com',
+        'yamunathuta1@gmail.com',
+        'jyothsnapatnana@gmail.com',
+        'mahadevumatha@gmail.com',
+        'pogirihari617@gmail.com',
     ];
 
-    console.log(`Sending SSC CGL notification emails to ${recipients.length} recipients...`);
+    console.log(`Sending RRB Technician Recruitment 2025 notification emails to recipients...`);
 
     // Email content
-    const subject = 'YOKOGAWA Recruitment Drive 2025 – Diploma Trainee Engineer | 3 LPA | Apply Now';
-    const text = 'Dear Candidate,\n\n' +
-        'We are excited to announce the YOKOGAWA Recruitment Drive 2025 for the position of Diploma Trainee Engineer. This opportunity is brought to you by the Department of Technical Education, Government of Andhra Pradesh.\n\n' +
-        'Position: Diploma Trainee Engineer\n' +
-        'Salary: 3 LPA\n' +
-        'Job Location: Bangalore\n' +
-        'Last Date for Registration: 19-06-2025\n\n' +
-        'Eligibility:\n' +
-        '- 2025 pass outs of Diploma in DECE, DEEE, or DAEIE\n' +
-        '- Minimum 60% in academics from SSC onwards with no active backlogs\n\n' +
-        'Benefits:\n' +
-        '- Free Transportation\n' +
-        '- Medical Insurance\n' +
-        '- Subsidized Cafeteria Meals\n' +
-        '- On-site opportunities in Japan\n' +
-        '- Japanese Language Training\n\n' +
-        'Selection Process:\n' +
-        '- Online Assessment (Technical)\n' +
-        '- Technical Interview & HR Interview\n' +
-        '- Issue of Offer Letter\n\n' +
-        'Service Agreement:\n' +
-        'Bond period of 3 years (If you leave within 3 years, a recovery of ₹2,00,000 applies)\n\n' +
-        'How to Apply:\n' +
-        'Interested and eligible candidates can apply using the link below:\n' +
-        'Apply Here: https://docs.google.com/forms/d/e/1FAIpQLSfHpwV6rm3aP8FljXr-SrveHyCskV4_BtMKIO8UYwXsLhDX1Q/viewform?usp=send_form\n\n' +
-        'Note:\n' +
-        'Only students who are committed to joining after selection should apply.\n\n' +
-        'For more details, please refer to the official notification or contact your Training & Placement Cell.\n\n' +
-        'Best wishes,\n' +
-        'Training & Placement Cell\n' +
-        'Department of Technical Education\n' +
-        'Government of Andhra Pradesh';
+    const subject = '🚆 RRB Technician Recruitment 2025 – 6180 Vacancies | Apply Before 28th July!';
+    
 
-    const html = `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #f9f9f9; border-radius: 8px;">
-      <h2 style="color: #003366; text-align: center; margin-bottom: 0;">YOKOGAWA Recruitment Drive 2025</h2>
-      <h3 style="color: #ff9900; text-align: center; margin-top: 8px;">Diploma Trainee Engineer | 3 LPA</h3>
-      <p style="font-size: 16px; color: #222;">
-        <strong>Dear Candidate,</strong><br><br>
-        We are excited to announce the <b>YOKOGAWA Recruitment Drive 2025</b> for the position of <b>Diploma Trainee Engineer</b>. This opportunity is brought to you by the Department of Technical Education, Government of Andhra Pradesh.
-      </p>
-      <ul style="font-size: 15px; color: #333; line-height: 1.7;">
-        <li><b>Position:</b> Diploma Trainee Engineer</li>
-        <li><b>Salary:</b> 3 LPA</li>
-        <li><b>Job Location:</b> Bangalore</li>
-        <li><b>Last Date for Registration:</b> 19-06-2025</li>
-      </ul>
-      <h4 style="color: #1976d2; margin-bottom: 4px;">Eligibility:</h4>
-      <ul style="font-size: 15px; color: #333;">
-        <li>2025 pass outs of Diploma in DECE, DEEE, or DAEIE</li>
-        <li>Minimum 60% in academics from SSC onwards with no active backlogs</li>
-      </ul>
-      <h4 style="color: #1976d2; margin-bottom: 4px;">Benefits:</h4>
-      <ul style="font-size: 15px; color: #333;">
-        <li>Free Transportation</li>
-        <li>Medical Insurance</li>
-        <li>Subsidized Cafeteria Meals</li>
-        <li>On-site opportunities in Japan</li>
-        <li>Japanese Language Training</li>
-      </ul>
-      <h4 style="color: #1976d2; margin-bottom: 4px;">Selection Process:</h4>
-      <ul style="font-size: 15px; color: #333;">
-        <li>Online Assessment (Technical)</li>
-        <li>Technical Interview & HR Interview</li>
-        <li>Issue of Offer Letter</li>
-      </ul>
-      <h4 style="color: #1976d2; margin-bottom: 4px;">Service Agreement:</h4>
-      <ul style="font-size: 15px; color: #333;">
-        <li>Bond period of 3 years (If you leave within 3 years, a recovery of ₹2,00,000 applies)</li>
-      </ul>
-      <h4 style="color: #1976d2; margin-bottom: 4px;">How to Apply:</h4>
-      <p style="font-size: 15px; color: #333;">Interested and eligible candidates can apply using the link below:</p>
-      <div style="text-align: center; margin: 24px 0;">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfHpwV6rm3aP8FljXr-SrveHyCskV4_BtMKIO8UYwXsLhDX1Q/viewform?usp=send_form" style="background-color: #388e3c; color: white; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-size: 18px; font-weight: bold; display: inline-block;">Apply Here</a>
-      </div>
-      <p style="font-size: 15px; color: #d32f2f;"><b>Note:</b> Only students who are committed to joining after selection should apply.</p>
-      <p style="font-size: 15px; color: #333;">For more details, please refer to the official notification or contact your Training & Placement Cell.</p>
-      <p style="font-size: 16px; line-height: 1.6;">Best wishes,<br>Training & Placement Cell<br>Department of Technical Education<br>Government of Andhra Pradesh</p>
-    </div>`;
+    const text = `Dear Telugu Info Community Member ,
+
+We are excited to share a major job opportunity from the Indian Railways! 🚨
+
+The Railway Recruitment Board (RRB) has officially released the RRB Technician Notification 2025 through the Employment Newspaper. This year, 6180 vacancies have been announced:
+
+👷‍♂️ Technician Grade 1 Signal – 180 posts  
+🛠️ Technician Grade 3 – 6000 posts  
+
+Important Dates:
+- Apply Online: 28th June 2025  
+- Last Date to Apply: 28th July 2025 (11:59 PM)  
+- Fee Payment Deadline: 28th July 2025
+
+Eligibility:
+- Grade 1 Signal: B.Sc. or Diploma/Degree in Engineering  
+- Grade 3: Matric/SSLC + ITI or Act Apprenticeship
+
+Application Fee:
+- SC/ST/Female/EWS/PwD: ₹250 (refundable after CBT)  
+- General/OBC: ₹500 (₹400 refundable after CBT)
+
+Selection Process:
+1. Computer-Based Test (CBT)
+2. Document Verification
+3. Medical Examination
+
+Salary:
+- Grade 1 Signal – ₹29,200/month  
+- Grade 3 – ₹19,900/month
+
+Apply Now: https://www.rrbcdg.gov.in
+
+Don’t miss this opportunity to work with Indian Railways.
+
+Best regards,  
+Telugu Info Team`;
+
+
+const html = `
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; background: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+  <div style="text-align: center; background: linear-gradient(135deg, #1565c0, #1e88e5); color: white; padding: 24px; border-radius: 8px;">
+    <h2 style="margin: 0;">🚆 RRB Technician Recruitment 2025</h2>
+    <p style="font-size: 16px;">6180 Vacancies | Apply Before 28th July</p>
+  </div>
+
+    <div style="text-align: center; margin-bottom: 20px;">
+    <img src="https://www.careerpower.in/blog/wp-content/uploads/2025/06/16143004/rrb-technician.webp" alt="RRB Technician Recruitment Banner" style="max-width: 100%; border-radius: 8px;">
+  </div>
+  
+
+  <div style="padding: 20px; line-height: 1.6; color: #333;">
+    <p>Dear <strong>Telugu Info Community Member</strong>,</p>
+    <p>We are excited to share a major job opportunity from the Indian Railways! 🚨</p>
+
+    <h4>📌 Vacancies:</h4>
+    <ul>
+      <li>👷‍♂️ <strong>Technician Grade 1 Signal</strong> – 180 posts</li>
+      <li>🛠️ <strong>Technician Grade 3</strong> – 6000 posts</li>
+    </ul>
+
+    <h4>🗓️ Important Dates:</h4>
+    <ul>
+      <li><strong>Apply Online:</strong> 28th June 2025</li>
+      <li><strong>Last Date to Apply:</strong> 28th July 2025 (11:59 PM)</li>
+      <li><strong>Fee Payment Deadline:</strong> 28th July 2025</li>
+    </ul>
+
+    <h4>🎓 Eligibility:</h4>
+    <ul>
+      <li><strong>Grade 1 Signal:</strong> B.Sc. or Diploma/Degree in Engineering</li>
+      <li><strong>Grade 3:</strong> Matric/SSLC + ITI or Act Apprenticeship</li>
+    </ul>
+
+    <h4>💰 Application Fee:</h4>
+    <ul>
+      <li><strong>SC/ST/Female/EWS/PwD:</strong> ₹250 (refundable after CBT)</li>
+      <li><strong>General/OBC:</strong> ₹500 (₹400 refundable after CBT)</li>
+    </ul>
+
+    <h4>🧾 Selection Process:</h4>
+    <ol>
+      <li>Computer-Based Test (CBT)</li>
+      <li>Document Verification</li>
+      <li>Medical Examination</li>
+    </ol>
+
+    <h4>💼 Salary:</h4>
+    <ul>
+      <li><strong>Grade 1 Signal:</strong> ₹29,200/month</li>
+      <li><strong>Grade 3:</strong> ₹19,900/month</li>
+    </ul>
+
+    <p style="margin-top: 20px; text-align: center;">
+      👉 <a href="https://www.rrbcdg.gov.in" style="background: #388e3c; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">Apply Now</a>
+    </p>
+
+    <p style="margin-top: 30px;">Don’t miss this opportunity to build a career with Indian Railways. Prepare well and apply before the deadline!</p>
+  </div>
+
+  <div style="text-align: center; font-size: 14px; color: #666; border-top: 1px solid #ddd; padding-top: 20px;">
+    Warm regards,<br>
+    <strong>Telugu Info Team</strong><br>
+    📧 marotinani06@gmail.com | 🌐 https://telugu-info.vercel.app/ | 📞 917036180813
+  </div>
+</div>`;
+
 
     // Send emails to all recipients
     let successCount = 0;
