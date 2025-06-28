@@ -5,6 +5,7 @@ const mainRouter = require("./src/routers/router");
 const emailRouter = require("./src/routers/emailRouter");
 const http = require("http");
 const cors = require('cors');
+const authRoutes = require("./src/routes/authRoutes");
 
 var PORT = process.env.PORT || 4000;
 connectdb();
@@ -32,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", mainRouter);
 app.use("/api/email", emailRouter);
-
+app.use("/api/auth", authRoutes);
 // azureOpenAi();
 // openAiWithAzureKeys();
 

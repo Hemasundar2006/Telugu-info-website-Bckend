@@ -7,6 +7,7 @@ require('dotenv').config();
  * Forgot Password - Generate reset token and send email
  */
 const forgotPassword = async (req, res) => {
+    
     try {
         const { email } = req.body;
 
