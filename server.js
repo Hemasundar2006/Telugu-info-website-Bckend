@@ -1,70 +1,47 @@
-const express = require('express');
-const cors = require('cors');
-const connectdb = require('./src/config/db');
-const authRoutes = require('./src/routes/authRoutes');
-require('dotenv').config();
+const express = require("express");
+require("dotenv").config();
+const connectdb = require("./src/config/db");
+const mainRouter = require("./src/routers/router");
+const emailRouter = require("./src/routers/emailRouter");
+const authRoutes = require("./src/routes/authRoutes"); // ✅ Import forgot/reset password routes
+const cors = require("cors");
 
-// Initialize Express app
-const app = express();
-
-// Middleware
-app.use(cors());
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
-
-// Request logging middleware
-app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-    next();
-});
-
-// Connect to MongoDB
+const PORT = process.env.PORT || 4000;
 connectdb();
 
-// Routes
-app.use('/api/auth', authRoutes);
+const app = express();
 
-// Root endpoint
-app.get('/', (req, res) => {
-    res.json({
-        success: true,
-        message: 'Telugu Info Backend API is running!',
-        version: '1.0.0',
-        endpoints: {
-            forgotPassword: 'POST /api/auth/forgot-password',
-            resetPassword: 'POST /api/auth/reset-password/:token'
-        }
-    });
-});
+// CORS setup
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    credentials: true,
+    maxAge: 86400
+}));
 
-// 404 handler for undefined routes
-app.use('*', (req, res) => {
-    res.status(404).json({
-        success: false,
-        message: `Route ${req.originalUrl} not found`,
-        availableRoutes: {
-            forgotPassword: 'POST /api/auth/forgot-password',
-            resetPassword: 'POST /api/auth/reset-password/:token'
-        }
-    });
-});
+app.options('*', cors());
 
-// Global error handler
-app.use((error, req, res, next) => {
-    console.error('❌ Unhandled error:', error);
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Route Mounting
+app.use("/api", mainRouter);
+app.use("/api/email", emailRouter);
+app.use("/api/auth", authRoutes); // ✅ This enables forgot-password & reset-password routes
+
+// Error Handling
+app.use((err, req, res, next) => {
+    console.error(err.stack);
     res.status(500).json({
         success: false,
-        message: 'Internal server error',
-        error: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
+        message: 'Something went wrong!',
+        error: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
 });
 
-// Start server
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`✅ Server is running on port ${PORT}`);
-    console.log(`🌐 Server URL: http://localhost:${PORT}`);
-    console.log(`📝 API Endpoints:`);
-    console.log(`   POST /api/auth/forgot-password`);
-    console.log(`   POST /api/auth/reset-password/:token`);
-}); 
+});

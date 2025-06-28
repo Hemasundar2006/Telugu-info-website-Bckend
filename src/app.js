@@ -5,7 +5,7 @@ const app = express();
 const feedbackRoutes = require('./routes/feedback');
 const quizRouter = require('./routers/quiz/quizRouter');
 const emailRouter = require('./routers/email/emailRouter');
-const authRouter = require('./routers/auth/authRouter');
+const authRouter = require('./routes/authRoutes');
 const { scheduleDailyQuizGeneration } = require('./services/quizCronService');
 
 // Connect to MongoDB
@@ -33,6 +33,8 @@ app.use('/api/feedback', feedbackRoutes);
 app.use('/api/quiz', quizRouter);
 app.use('/api/emails', emailRouter);
 app.use('/api/auth', authRouter);
+
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
