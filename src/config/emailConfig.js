@@ -41,7 +41,7 @@ const sendEmail = async (to, subject, text, html) => {
         console.log('Using email account:', process.env.EMAIL_USER);
 
         const mailOptions = {
-            from: `"Telugu Info Website" <${process.env.EMAIL_USER}>`,
+            from: `"Telugu Info" <${process.env.EMAIL_USER}>`,
             to,
             subject,
             text: text || '',

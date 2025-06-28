@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const userDB = require('../../models/user/user');
+const { sendEmail } = require('../../config/emailConfig');
 
 const router = express.Router();
 
@@ -23,6 +24,37 @@ router.post('/register', async (req, res) => {
 
         // Save user to database
         await document.save();
+
+        // Send welcome email
+        const subject = 'Welcome to Telugu Info - Registration Successful';
+        const text = `Dear ${data.name || 'User'},\n\nThank you for registering with Telugu Info Website. We are excited to have you join our community!\n\nYour account has been successfully created. You can now log in and start exploring our content.\n\nBest regards,\nThe Telugu Info Team`;
+        const html = `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h1 style="color: #2c3e50; text-align: center;">Welcome to Telugu Info</h1>
+                <h2 style="color: #34495e; text-align: center;">Registration Successful</h2>
+                <p style="font-size: 16px; line-height: 1.6;">Dear ${data.name || 'User'},</p>
+                <p style="font-size: 16px; line-height: 1.6;">Thank you for registering with Telugu Info Website. We are excited to have you join our community!</p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                    <h3 style="color: #2c3e50; margin-top: 0;">Your Account Details</h3>
+                    <p style="font-size: 16px; line-height: 1.6;">Email: ${data.email}</p>
+                </div>
+                <p style="font-size: 16px; line-height: 1.6;">Your account has been successfully created. You can now log in and start exploring our content.</p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                    <h3 style="color: #2c3e50; margin-top: 0;">Join Our WhatsApp Channel</h3>
+                    <p style="font-size: 16px; line-height: 1.6;">Get instant updates and stay connected with our community:</p>
+                    <p style="font-size: 16px; line-height: 1.6;"><a href="https://whatsapp.com/channel/0029Va9UwjB6HXUNjS0Sf43L" style="color: #007bff; text-decoration: none;">Join WhatsApp Channel →</a></p>
+                </div>
+                <p style="font-size: 16px; line-height: 1.6;">Best regards,<br>The Telugu Info Team</p>
+            </div>
+        `;
+
+        try {
+            await sendEmail(data.email, subject, text, html);
+        } catch (emailError) {
+            console.error('Failed to send welcome email:', emailError);
+            // Don't fail the registration if email fails
+        }
+
         return res.status(200).json({ success : true , data : document})
 
     } catch (err) {

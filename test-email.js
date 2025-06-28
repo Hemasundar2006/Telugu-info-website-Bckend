@@ -3,49 +3,214 @@ const { sendEmail } = require('./src/config/emailConfig');
 async function testEmail() {
     console.log('Starting email test...');
     
-    // Test case 1: Basic email
-    console.log('\nTest Case 1: Basic email');
-    try {
-        const result = await sendEmail(
-            'user@example.com',
-            'Thank You for subscribing to Telugu Info Website',
-            'Thank you for subscribing to Telugu Info Website. We are excited to have you on board!',
-            '<h1>Thank You for subscribing to Telugu Info Website</h1><p>Thank you for subscribing to Telugu Info Website. We are excited to have you on board!</p>'
-        );
+    // List of email recipients
+    const recipients = [
+        'marotinani06@gmail.com',
+        'nadimintihemalatha96@gmail.com',
+        'hemasaiamujuri3@gmail.com',
+        'marothihemasundar03@gmail.com',
+        'gireeshpurli@gmail.com',
+        'krishnaballanki69@gmail.com',
+        'podugucharan95@gmail.com',
+        'madabatthulasravanthrakesh@gmail.com',
+        'krishnavenigadi11@gmail.com',
+        'crvcrv114@gmail.com',
+        'ganapathipanchireddy0@gmail.com',
+        'kumarlikhith27@gmail.com',
+        'bangarujoes@gmail.com',
+        'teja2626swar@gmail.com',
+        'pradeep@gmail.com',
+        'chintadaprasad12@gmail.com',
+        'sravyasrimusirana@gmail.com',
+        'sravankoncha@gmail.com',
+        'sathwik333chand@gmail.com',
+        'bandarumadhuri32@gmail.com',
+        'ponnanahema@gmail.com',
+        'rameshstudy1234@gmail.com',
+        'kundrapukumarswamy74@gmail.com',
+        'naravadilleswararao1315@gmail.com',
+        'podugucharan81@gmail.com',
+        'rajitha9410@gmail.com',
+        'sairutwik1123@gmail.com',
+        'adinigowthami@gmail.com',
+        'sutarisuchitra141@gmail.com',
+        'mohansivaram2007@gmail.com',
+        'narayanamurthykarnayana@gmail.com',
+        'hemasundarmaroti@gmail.com',
+        'hmmhmm@gmail.com',
+        'sadfsafd@gmail.com',
+        'shanmukharaoadapaka123@gmail.com',
+        'akashvenkat4454@gmail.com',
+        'tmgcewziubpoqwq@suiemail.com',
+        'notforuse982@gmail.com',
+        'hiteshganni007@gmail.com',
+        'sam0cypher@gmail.com',
+        'kiransomulakiran@gmail.com',
+        'jayashreenaidu04@gmail.com',
+        'manichindiri@gmail.com',
+        'magesh12092004@gmail.com',
+        'vajjathanuja@gmail.com',
+        'himahasini.kallepalli@gmail.com',
+        'gowthamkalahasti@gmail.com',
+        'nadimintihemalatha7@gmail.com',
+        'sudarsanpalavalasa@gmail.com',
+        'mahalakshmikonna365@gmail.com',
+        'saichandubondala9177@gmail.com',
+        '21065chb@gmail.com',
+        'saitrinadhh@gmail.com',
+        'naveenallu.2008@gmail.com',
+        'harikagummadi360@gmail.com',
+        'lakshmivangapandu88@gmail.com',
+        'smilykingtejasaikumar@gmail.com',
+        'yamunathuta1@gmail.com',
+        'jyothsnapatnana@gmail.com',
+        'mahadevumatha@gmail.com',
+        'pogirihari617@gmail.com',
+    ];
 
-        if (result.success) {
-            console.log('✅ Email sent successfully!');
-            console.log('Message ID:', result.messageId);
-            console.log('Response:', result.info);
-        } else {
-            console.error('❌ Failed to send email:', result.error);
-            if (result.code) {
-                console.error('Error code:', result.code);
+    console.log(`Sending RRB Technician Recruitment 2025 notification emails to recipients...`);
+
+    // Email content
+    const subject = '🚆 RRB Technician Recruitment 2025 – 6180 Vacancies | Apply Before 28th July!';
+    
+
+    const text = `Dear Telugu Info Community Member ,
+
+We are excited to share a major job opportunity from the Indian Railways! 🚨
+
+The Railway Recruitment Board (RRB) has officially released the RRB Technician Notification 2025 through the Employment Newspaper. This year, 6180 vacancies have been announced:
+
+👷‍♂️ Technician Grade 1 Signal – 180 posts  
+🛠️ Technician Grade 3 – 6000 posts  
+
+Important Dates:
+- Apply Online: 28th June 2025  
+- Last Date to Apply: 28th July 2025 (11:59 PM)  
+- Fee Payment Deadline: 28th July 2025
+
+Eligibility:
+- Grade 1 Signal: B.Sc. or Diploma/Degree in Engineering  
+- Grade 3: Matric/SSLC + ITI or Act Apprenticeship
+
+Application Fee:
+- SC/ST/Female/EWS/PwD: ₹250 (refundable after CBT)  
+- General/OBC: ₹500 (₹400 refundable after CBT)
+
+Selection Process:
+1. Computer-Based Test (CBT)
+2. Document Verification
+3. Medical Examination
+
+Salary:
+- Grade 1 Signal – ₹29,200/month  
+- Grade 3 – ₹19,900/month
+
+Apply Now: https://www.rrbcdg.gov.in
+
+Don’t miss this opportunity to work with Indian Railways.
+
+Best regards,  
+Telugu Info Team`;
+
+
+const html = `
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; background: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+  <div style="text-align: center; background: linear-gradient(135deg, #1565c0, #1e88e5); color: white; padding: 24px; border-radius: 8px;">
+    <h2 style="margin: 0;">🚆 RRB Technician Recruitment 2025</h2>
+    <p style="font-size: 16px;">6180 Vacancies | Apply Before 28th July</p>
+  </div>
+
+    <div style="text-align: center; margin-bottom: 20px;">
+    <img src="https://www.careerpower.in/blog/wp-content/uploads/2025/06/16143004/rrb-technician.webp" alt="RRB Technician Recruitment Banner" style="max-width: 100%; border-radius: 8px;">
+  </div>
+  
+
+  <div style="padding: 20px; line-height: 1.6; color: #333;">
+    <p>Dear <strong>Telugu Info Community Member</strong>,</p>
+    <p>We are excited to share a major job opportunity from the Indian Railways! 🚨</p>
+
+    <h4>📌 Vacancies:</h4>
+    <ul>
+      <li>👷‍♂️ <strong>Technician Grade 1 Signal</strong> – 180 posts</li>
+      <li>🛠️ <strong>Technician Grade 3</strong> – 6000 posts</li>
+    </ul>
+
+    <h4>🗓️ Important Dates:</h4>
+    <ul>
+      <li><strong>Apply Online:</strong> 28th June 2025</li>
+      <li><strong>Last Date to Apply:</strong> 28th July 2025 (11:59 PM)</li>
+      <li><strong>Fee Payment Deadline:</strong> 28th July 2025</li>
+    </ul>
+
+    <h4>🎓 Eligibility:</h4>
+    <ul>
+      <li><strong>Grade 1 Signal:</strong> B.Sc. or Diploma/Degree in Engineering</li>
+      <li><strong>Grade 3:</strong> Matric/SSLC + ITI or Act Apprenticeship</li>
+    </ul>
+
+    <h4>💰 Application Fee:</h4>
+    <ul>
+      <li><strong>SC/ST/Female/EWS/PwD:</strong> ₹250 (refundable after CBT)</li>
+      <li><strong>General/OBC:</strong> ₹500 (₹400 refundable after CBT)</li>
+    </ul>
+
+    <h4>🧾 Selection Process:</h4>
+    <ol>
+      <li>Computer-Based Test (CBT)</li>
+      <li>Document Verification</li>
+      <li>Medical Examination</li>
+    </ol>
+
+    <h4>💼 Salary:</h4>
+    <ul>
+      <li><strong>Grade 1 Signal:</strong> ₹29,200/month</li>
+      <li><strong>Grade 3:</strong> ₹19,900/month</li>
+    </ul>
+
+    <p style="margin-top: 20px; text-align: center;">
+      👉 <a href="https://www.rrbcdg.gov.in" style="background: #388e3c; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">Apply Now</a>
+    </p>
+
+    <p style="margin-top: 30px;">Don’t miss this opportunity to build a career with Indian Railways. Prepare well and apply before the deadline!</p>
+  </div>
+
+  <div style="text-align: center; font-size: 14px; color: #666; border-top: 1px solid #ddd; padding-top: 20px;">
+    Warm regards,<br>
+    <strong>Telugu Info Team</strong><br>
+    📧 marotinani06@gmail.com | 🌐 https://telugu-info.vercel.app/ | 📞 917036180813
+  </div>
+</div>`;
+
+
+    // Send emails to all recipients
+    let successCount = 0;
+    let failureCount = 0;
+
+    for (const email of recipients) {
+        try {
+            console.log(`Sending email to: ${email}`);
+            const result = await sendEmail(email, subject, text, html);
+            
+            if (result.success) {
+                console.log(`✅ Email sent successfully to: ${email}`);
+                successCount++;
+            } else {
+                console.error(`❌ Failed to send email to ${email}:`, result.error);
+                failureCount++;
             }
+            
+            // Add a small delay between emails to avoid rate limiting
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        } catch (error) {
+            console.error(`❌ Error sending email to ${email}:`, error);
+            failureCount++;
         }
-    } catch (error) {
-        console.error('❌ Error in test:', error);
     }
 
-    // Test case 2: HTML only email
-    console.log('\nTest Case 2: HTML only email');
-    try {
-        const result = await sendEmail(
-            'marothihemasundar03@gmail.com',
-            'Thank You for subscribing to Telugu Info Website',
-            'Thank you for subscribing to Telugu Info Website. We are excited to have you on board!',
-            '<h1>Thank You for subscribing to Telugu Info Website</h1><p>Thank you for subscribing to Telugu Info Website. We are excited to have you on board!</p>'
-        );
-
-        if (result.success) {
-            console.log('✅ HTML email sent successfully!');
-            console.log('Message ID:', result.messageId);
-        } else {
-            console.error('❌ Failed to send HTML email:', result.error);
-        }
-    } catch (error) {
-        console.error('❌ Error in HTML test:', error);
-    }
+    console.log('\nEmail sending summary:');
+    console.log(`Total recipients: ${recipients.length}`);
+    console.log(`Successful: ${successCount}`);
+    console.log(`Failed: ${failureCount}`);
 }
 
 // Run the tests

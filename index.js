@@ -3,7 +3,7 @@ require("dotenv").config();
 const connectdb = require("./src/config/db");
 const mainRouter = require("./src/routers/router");
 const emailRouter = require("./src/routers/emailRouter");
-const https = require("https");
+const http = require("http");
 const cors = require('cors');
 
 var PORT = process.env.PORT || 4000;
@@ -13,27 +13,23 @@ const server = require("http").createServer(app);
 
 // Enable CORS for all routes
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://your-production-url.com']
+    origin: '*', // Allow all origins during development
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    credentials: true,
+    maxAge: 86400 // 24 hours
 }));
 
-// Add headers middleware
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    
-    // Handle preflight requests
-    if (req.method === 'OPTIONS') {
-        return res.sendStatus(200);
-    }
-    next();
-});
+// Handle preflight requests
+app.options('*', cors());
 
-// parse application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: false }));
-
-// parse application/json
+// Parse JSON bodies
 app.use(express.json());
+
+// Parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/api", mainRouter);
 app.use("/api/email", emailRouter);
 
@@ -42,11 +38,11 @@ app.use("/api/email", emailRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error('Global error handler:', err);
+    console.error(err.stack);
     res.status(500).json({
         success: false,
-        message: 'Internal server error',
-        error: err.message
+        message: 'Something went wrong!',
+        error: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
 });
 
