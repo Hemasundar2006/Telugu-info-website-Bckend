@@ -6,6 +6,8 @@ require('dotenv').config();
 /**
  * Forgot Password - Generate reset token and send email
  */
+const FRONTEND_URL = "https://telugu-info.vercel.app";
+
 const forgotPassword = async (req, res) => {
     
     try {
