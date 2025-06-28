@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const userDB = require('../../models/user/user');
 const { sendEmail } = require('../../config/emailConfig');
+const crypto = require('crypto');
 
 const router = express.Router();
 

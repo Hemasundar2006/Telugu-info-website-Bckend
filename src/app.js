@@ -1,8 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const app = express();
 const feedbackRoutes = require('./routes/feedback');
 const quizRouter = require('./routers/quiz/quizRouter');
+const emailRouter = require('./routers/email/emailRouter');
+const authRouter = require('./routers/auth/authRouter');
 const { scheduleDailyQuizGeneration } = require('./services/quizCronService');
 
 // Connect to MongoDB
@@ -18,6 +21,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/telugu-in
 });
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -27,6 +31,8 @@ app.use(express.static('public'));
 // API routes
 app.use('/api/feedback', feedbackRoutes);
 app.use('/api/quiz', quizRouter);
+app.use('/api/emails', emailRouter);
+app.use('/api/auth', authRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
