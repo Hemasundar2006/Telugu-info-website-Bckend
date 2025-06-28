@@ -1,10 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const connectdb = require("./src/config/db");
-const mainRouter = require("./src/routers/router");
-const emailRouter = require("./src/routers/emailRouter");
-const authRoutes = require("./src/routes/authRoutes"); // ✅ Import forgot/reset password routes
-const userRoutes = require("./src/routers/user/user"); // ✅ Import user routes
+const authRoutes = require("./routes/authRoutes");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 4000;
@@ -29,10 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Route Mounting
-app.use("/api", mainRouter);
-app.use("/api/email", emailRouter);
-app.use("/api/auth", authRoutes); // ✅ This enables forgot-password & reset-password routes
-app.use("/api/users", userRoutes); // ✅ Mount user routes
+app.use("/api/auth", authRoutes);
 
 // Error Handling
 app.use((err, req, res, next) => {
