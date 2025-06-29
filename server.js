@@ -2,6 +2,8 @@ const express = require("express");
 require("dotenv").config();
 const connectdb = require("./src/config/db");
 const authRoutes = require("./routes/authRoutes");
+const massEmailRouter = require("./src/routers/email/massEmailRouter");
+const userRouter = require("./src/routers/user/user");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 4000;
@@ -13,7 +15,7 @@ const app = express();
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'user-id'],
     exposedHeaders: ['Content-Range', 'X-Content-Range'],
     credentials: true,
     maxAge: 86400
@@ -27,6 +29,13 @@ app.use(express.urlencoded({ extended: true }));
 
 // Route Mounting
 app.use("/api/auth", authRoutes);
+app.use("/api/emails", massEmailRouter);
+app.use("/api/users", userRouter);
+
+// Test route to verify server is working
+app.get('/api/test', (req, res) => {
+    res.json({ success: true, message: 'Server is working!' });
+});
 
 // Error Handling
 app.use((err, req, res, next) => {
