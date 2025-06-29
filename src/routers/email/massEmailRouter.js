@@ -3,27 +3,8 @@ const router = express.Router();
 const userDB = require('../../models/user/user');
 const { sendEmail } = require('../../config/emailConfig');
 
-// Middleware to check if user is admin
-const isAdmin = async (req, res, next) => {
-    try {
-        const userId = req.headers['user-id'];
-        if (!userId) {
-            return res.status(401).json({ success: false, message: 'Authentication required' });
-        }
-
-        const user = await userDB.findById(userId);
-        if (!user || user.role !== 'admin') {
-            return res.status(403).json({ success: false, message: 'Admin access required' });
-        }
-
-        next();
-    } catch (err) {
-        return res.status(500).json({ success: false, message: err.message });
-    }
-};
-
-// Send email to all users (admin only)
-router.post('/send-to-all', isAdmin, async (req, res) => {
+// Send email to all users
+router.post('/send-to-all', async (req, res) => {
     try {
         const { subject, text, html } = req.body;
 
