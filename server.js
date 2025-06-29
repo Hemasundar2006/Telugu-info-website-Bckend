@@ -2,7 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const connectdb = require("./src/config/db");
 const authRoutes = require("./routes/authRoutes");
-const massEmailRouter = require("./src/routers/email/massEmailRouter");
+const massEmailRouter = require("./src/routers/email/massEmailRouter"); // ✅ correctly imported
 const userRouter = require("./src/routers/user/user");
 const cors = require("cors");
 
@@ -27,17 +27,19 @@ app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Route Mounting
+// ✅ Correct route mounting
 app.use("/api/auth", authRoutes);
-app.use("/api/emails", massEmailRouter);
+app.use("/api/emails", emailRouter); // ✅ now using correct router
 app.use("/api/users", userRouter);
+// Optionally remove the duplicate if not needed
+// app.use('/api/email', require('./routes/email/emailRoutes'));
 
-// Test route to verify server is working
+// Test route
 app.get('/api/test', (req, res) => {
     res.json({ success: true, message: 'Server is working!' });
 });
 
-// Error Handling
+// Global error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({
@@ -47,6 +49,7 @@ app.use((err, req, res, next) => {
     });
 });
 
+// Start server
 app.listen(PORT, () => {
     console.log(`✅ Server is running on port ${PORT}`);
 });

@@ -8,6 +8,16 @@ const validateEmail = (email) => {
     return re.test(email);
 };
 
+router.post('/send-to-all', async (req, res) => {
+    try {
+        const { subject, text, html } = req.body;
+        const result = await sendEmail(subject, text, html);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Route to handle newsletter subscriptions
 router.post('/newsletter/subscribe', async (req, res) => {
     try {
