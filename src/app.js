@@ -10,7 +10,7 @@ const authRouter = require('./routes/authRoutes');
 const { scheduleDailyQuizGeneration } = require('./services/quizCronService');
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/telugu-info', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://marotinani06:Ammananna%40123@cluster0.pf57m.mongodb.net/telugu-info', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
