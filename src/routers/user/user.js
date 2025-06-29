@@ -8,6 +8,42 @@ const router = express.Router();
 
 const saltRounds = 10;
 
+// Middleware to check if user is admin
+const isAdmin = async (req, res, next) => {
+    try {
+        const userId = req.headers['user-id'];
+        if (!userId) {
+            return res.status(401).json({ success: false, message: 'Authentication required' });
+        }
+
+        const user = await userDB.findById(userId);
+        if (!user || user.role !== 'admin') {
+            return res.status(403).json({ success: false, message: 'Admin access required' });
+        }
+
+        next();
+    } catch (err) {
+        return res.status(500).json({ success: false, message: err.message });
+    }
+};
+
+// Get all users (admin only)
+router.get('/all', isAdmin, async (req, res) => {
+    try {
+        const users = await userDB.find({ isDeleted: false })
+            .select('-password') // Exclude password field
+            .sort({ createdAt: -1 }); // Sort by newest first
+
+        return res.status(200).json({
+            success: true,
+            data: users,
+            total: users.length
+        });
+    } catch (err) {
+        console.error('Error fetching users:', err);
+        return res.status(500).json({ success: false, message: err.message });
+    }
+});
 
 router.post('/register', async (req, res) => {
     const data = req.body;
