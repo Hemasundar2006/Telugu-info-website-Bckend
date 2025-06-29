@@ -49,11 +49,57 @@ router.post('/register', async (req, res) => {
     const data = req.body;
 
     try {
+        // Check if user already exists
         const user = await userDB.findOne({ email : data.email });
         if (user) {
             return res.status(400).json({ Success : false , message : 'User already exists please log in' });
         }
 
+        // Validate required fields
+        if (!data.name || !data.email || !data.password) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Name, email, and password are required fields' 
+            });
+        }
+
+        // Validate gender if provided
+        if (data.gender && !["male", "female"].includes(data.gender)) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Gender must be either "male" or "female"' 
+            });
+        }
+
+        // Validate mobile number format if provided
+        if (data.mobile) {
+            const mobileRegex = /^[0-9]{10}$/;  // Assumes 10-digit mobile number
+            if (!mobileRegex.test(data.mobile)) {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: 'Mobile number must be 10 digits' 
+                });
+            }
+        }
+
+        // Role validation
+        if (data.role === 'admin') {
+            // Check if request is from an admin
+            const adminId = req.headers['user-id'];
+            if (!adminId) {
+                return res.status(403).json({ success: false, message: 'Admin access required to create admin users' });
+            }
+
+            const adminUser = await userDB.findById(adminId);
+            if (!adminUser || adminUser.role !== 'admin') {
+                return res.status(403).json({ success: false, message: 'Only admins can create other admin users' });
+            }
+        } else {
+            // For non-admin registrations, ensure role is 'user'
+            data.role = 'user';
+        }
+
+        // Hash password
         data.password = await bcrypt.hash(data.password, saltRounds);
 
         // Create new user
