@@ -110,6 +110,39 @@ const resetPassword = async (req, res) => {
         user.clearResetToken();
         await user.save();
 
+        // Send confirmation email
+        const confirmationEmailHtml = `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h2 style="color: #333; text-align: center;">Password Changed Successfully</h2>
+                <p>Hello ${user.name || 'Valued User'},</p>
+                <p>This email confirms that your password for Telugu Info website has been successfully changed.</p>
+                <p>If you did not make this change, please contact our support team immediately.</p>
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="https://telugu-info.vercel.app/login" 
+                       style="background-color: #007bff; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                        Login to Your Account
+                    </a>
+                </div>
+                <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+                <p style="color: #666; font-size: 12px; text-align: center;">
+                    This is an automated email from Telugu Info Support. Please do not reply to this email.
+                </p>
+            </div>
+        `;
+
+        const emailResult = await sendEmail(
+            user.email,
+            'Password Changed Successfully - Telugu Info',
+            confirmationEmailHtml
+        );
+
+        if (!emailResult.success) {
+            console.warn('❌ Failed to send password change confirmation email:', emailResult.error);
+            // We don't want to fail the password reset if only the confirmation email fails
+        } else {
+            console.log(`✅ Password change confirmation email sent to: ${user.email}`);
+        }
+
         console.log(`✅ Password reset successfully for user: ${user.email}`);
         res.status(200).json({
             success: true,
