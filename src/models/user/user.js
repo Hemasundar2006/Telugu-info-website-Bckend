@@ -19,6 +19,19 @@ const userSchema = new mongoose.Schema({
         type : String,
         enum : ["male", "female"]
     },
+    qualification : {
+        type : String,
+        required : true,
+        enum : [
+            "High School",
+            "Intermediate",
+            "Bachelor's Degree",
+            "Master's Degree",
+            "Ph.D.",
+            "Diploma",
+            "Other"
+        ]
+    },
     password : {
         type : String,
         required : true
