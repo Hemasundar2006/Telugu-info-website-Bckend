@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const SECRET_KEY = process.env.JWT_SECRET;
+const { sendApprovalEmail, sendRejectionEmail } = require('../config/email');
 
 router.post('/register', async (req, res) => {
   try {
@@ -43,4 +44,19 @@ router.get('/users', verifyAdmin, async (req, res) => {
   }
 });
 
-module.exports = router; 
+router.delete('/reject-user/:id', verifyAdmin, async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+    try {
+      await sendRejectionEmail(user.email, user.name);
+    } catch (emailErr) {
+      return res.status(500).json({ success: false, message: 'User rejected, but failed to send email', error: emailErr.message });
+    }
+    res.json({ success: true, message: 'User rejected and deleted' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Server error', error: err.message });
+  }
+});
+
+module.exports = { sendApprovalEmail, sendRejectionEmail };
