@@ -12,9 +12,7 @@ const router = express.Router();
 
 // Middleware to add Socket.IO instance to request
 const addSocketIO = (req, res, next) => {
-    if (req.app.get('socketService')) {
-        req.io = req.app.get('socketService').getIO();
-    }
+    req.io = req.app.get('io');
     next();
 };
 
