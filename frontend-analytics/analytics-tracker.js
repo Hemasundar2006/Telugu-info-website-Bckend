@@ -32,12 +32,16 @@ class AnalyticsTracker {
 
     async init() {
         try {
+            console.log('Initializing analytics tracker...');
             // Get or create session ID
             await this.initializeSession();
             
             // Initialize WebSocket connection
             if (typeof io !== 'undefined') {
+                console.log('Socket.IO library found, initializing WebSocket...');
                 this.initializeWebSocket();
+            } else {
+                console.error('Socket.IO library not found! Make sure to include socket.io.min.js before analytics-tracker.js');
             }
             
             // Set up event listeners
@@ -55,7 +59,7 @@ class AnalyticsTracker {
             this.processEventQueue();
             
         } catch (error) {
-            this.log('Error initializing analytics tracker:', error);
+            console.error('Error initializing analytics tracker:', error);
         }
     }
 
@@ -95,36 +99,47 @@ class AnalyticsTracker {
 
     initializeWebSocket() {
         try {
+            console.log('Connecting to WebSocket server at:', this.config.websocketUrl);
             this.socket = io(this.config.websocketUrl);
             
             this.socket.on('connect', () => {
-                this.log('WebSocket connected');
+                console.log('WebSocket connected successfully. Socket ID:', this.socket.id);
                 
                 // Send user activity
-                this.socket.emit('user-activity', {
+                const activityData = {
                     sessionId: this.sessionId,
                     page: window.location.pathname,
                     userId: this.userId
-                });
+                };
+                console.log('Sending initial user activity:', activityData);
+                this.socket.emit('user-activity', activityData);
             });
 
-            this.socket.on('disconnect', () => {
-                this.log('WebSocket disconnected');
+            this.socket.on('connect_error', (error) => {
+                console.error('WebSocket connection error:', error);
+            });
+
+            this.socket.on('disconnect', (reason) => {
+                console.log('WebSocket disconnected. Reason:', reason);
             });
 
             // Set up periodic activity updates
             setInterval(() => {
                 if (this.socket && this.socket.connected) {
-                    this.socket.emit('user-activity', {
+                    const activityData = {
                         sessionId: this.sessionId,
                         page: window.location.pathname,
                         userId: this.userId
-                    });
+                    };
+                    console.log('Sending periodic user activity:', activityData);
+                    this.socket.emit('user-activity', activityData);
+                } else {
+                    console.warn('Cannot send activity update - socket disconnected');
                 }
             }, 30000); // Every 30 seconds
             
         } catch (error) {
-            this.log('Error initializing WebSocket:', error);
+            console.error('Error initializing WebSocket:', error);
         }
     }
 

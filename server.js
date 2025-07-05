@@ -47,6 +47,7 @@ app.set('io', io);
 // Socket.IO Analytics Connection Handler
 io.on('connection', (socket) => {
     console.log('Analytics client connected:', socket.id);
+    console.log('Total connected clients:', io.engine.clientsCount);
 
     // Handle user joining analytics dashboard
     socket.on('join-analytics', async (data) => {
@@ -58,8 +59,8 @@ io.on('connection', (socket) => {
                 lastActivity: { $gte: new Date(Date.now() - 30 * 60 * 1000) }
             });
             
+            console.log('Analytics dashboard joined. Active users:', activeUsersCount);
             socket.emit('active-users-count', { count: activeUsersCount });
-            console.log('User joined analytics dashboard');
         } catch (error) {
             console.error('Error joining analytics dashboard:', error);
         }
@@ -69,6 +70,7 @@ io.on('connection', (socket) => {
     socket.on('user-activity', async (data) => {
         try {
             const { sessionId, page, userId = null } = data;
+            console.log('Received user activity:', { sessionId, page, userId, socketId: socket.id });
             
             // Update active user record
             await ActiveUsers.findOneAndUpdate(
@@ -83,12 +85,19 @@ io.on('connection', (socket) => {
                 { upsert: true }
             );
 
+            // Get updated count
+            const activeUsersCount = await ActiveUsers.countDocuments({
+                lastActivity: { $gte: new Date(Date.now() - 30 * 60 * 1000) }
+            });
+            console.log('Updated active users count:', activeUsersCount);
+
             // Broadcast to analytics dashboard
             io.to('analytics-dashboard').emit('user-activity-update', {
                 sessionId,
                 page,
                 timestamp: new Date()
             });
+            io.to('analytics-dashboard').emit('active-users-count', { count: activeUsersCount });
         } catch (error) {
             console.error('Error tracking user activity:', error);
         }
@@ -115,16 +124,20 @@ io.on('connection', (socket) => {
     // Handle disconnect
     socket.on('disconnect', async () => {
         try {
+            console.log('Client disconnected:', socket.id);
+            console.log('Remaining connected clients:', io.engine.clientsCount);
+            
             // Remove user from active users if they were tracking
-            await ActiveUsers.deleteOne({ socketId: socket.id });
+            const result = await ActiveUsers.deleteOne({ socketId: socket.id });
+            console.log('Removed active user record:', result);
             
             // Update active users count
             const activeUsersCount = await ActiveUsers.countDocuments({
                 lastActivity: { $gte: new Date(Date.now() - 30 * 60 * 1000) }
             });
             
+            console.log('Active users after disconnect:', activeUsersCount);
             io.to('analytics-dashboard').emit('active-users-count', { count: activeUsersCount });
-            console.log('Analytics client disconnected:', socket.id);
         } catch (error) {
             console.error('Error handling disconnect:', error);
         }
@@ -133,11 +146,18 @@ io.on('connection', (socket) => {
 
 // Clean up inactive users every 5 minutes
 setInterval(async () => {
-    await cleanupActiveUsers();
-    const activeUsersCount = await ActiveUsers.countDocuments({
-        lastActivity: { $gte: new Date(Date.now() - 30 * 60 * 1000) }
-    });
-    io.to('analytics-dashboard').emit('active-users-count', { count: activeUsersCount });
+    try {
+        console.log('Running inactive users cleanup...');
+        const beforeCount = await ActiveUsers.countDocuments();
+        await cleanupActiveUsers();
+        const afterCount = await ActiveUsers.countDocuments({
+            lastActivity: { $gte: new Date(Date.now() - 30 * 60 * 1000) }
+        });
+        console.log(`Cleanup complete. Active users before: ${beforeCount}, after: ${afterCount}`);
+        io.to('analytics-dashboard').emit('active-users-count', { count: afterCount });
+    } catch (error) {
+        console.error('Error in cleanup interval:', error);
+    }
 }, 5 * 60 * 1000);
 
 // Route mounting
