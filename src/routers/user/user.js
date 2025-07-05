@@ -56,27 +56,10 @@ router.post('/register', async (req, res) => {
         }
 
         // Validate required fields
-        if (!data.name || !data.email || !data.password || !data.qualification) {
+        if (!data.name || !data.email || !data.password) {
             return res.status(400).json({ 
                 success: false, 
-                message: 'Name, email, password, and qualification are required fields' 
-            });
-        }
-
-        // Validate qualification
-        const validQualifications = [
-            "High School",
-            "Intermediate",
-            "Bachelor's Degree",
-            "Master's Degree",
-            "Ph.D.",
-            "Diploma",
-            "Other"
-        ];
-        if (!validQualifications.includes(data.qualification)) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'Invalid qualification. Must be one of: ' + validQualifications.join(', ')
+                message: 'Name, email, and password are required fields' 
             });
         }
 
@@ -137,7 +120,6 @@ router.post('/register', async (req, res) => {
                 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
                     <h3 style="color: #2c3e50; margin-top: 0;">Your Account Details</h3>
                     <p style="font-size: 16px; line-height: 1.6;">Email: ${data.email}</p>
-                    <p style="font-size: 16px; line-height: 1.6;">Qualification: ${data.qualification}</p>
                 </div>
                 <p style="font-size: 16px; line-height: 1.6;">Your account has been successfully created. You can now log in and start exploring our content.</p>
                 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
