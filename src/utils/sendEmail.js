@@ -2,16 +2,16 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 // Validate environment variables
-if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.error('❌ Email configuration missing. Please set EMAIL_USER and EMAIL_PASS in your .env file');
+if (!process.env.EMAIL_USER1 || !process.env.EMAIL_PASS1) {
+    console.error('❌ Email configuration missing. Please set EMAIL_USER1 and EMAIL_PASS1 in your .env file');
 }
 
 // Create transporter with Gmail SMTP
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+        user: process.env.EMAIL_USER1,
+        pass: process.env.EMAIL_PASS1
     },
     tls: {
         rejectUnauthorized: false
@@ -44,7 +44,7 @@ const sendEmail = async (to, subject, html) => {
         console.log(`📧 Sending email to: ${to}`);
 
         const mailOptions = {
-            from: `"Telugu Info Support" <${process.env.EMAIL_USER}>`,
+            from: `"Telugu Info Support" <${process.env.EMAIL_USER1}>`,
             to: to,
             subject: subject,
             html: html,
