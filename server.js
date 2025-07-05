@@ -1,15 +1,19 @@
 const express = require("express");
+const http = require("http");
 require("dotenv").config();
 const connectdb = require("./src/config/db");
 const authRoutes = require("./routes/authRoutes");
-const massEmailRouter = require("./src/routers/email/massEmailRouter"); // ✅ correctly imported
+const massEmailRouter = require("./src/routers/email/massEmailRouter");
 const userRouter = require("./src/routers/user/user");
+const analyticsRouter = require("./src/routers/analytics/analyticsRouter");
+const AnalyticsSocketService = require("./src/services/analyticsSocketService");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 4000;
 connectdb();
 
 const app = express();
+const server = http.createServer(app);
 
 // CORS setup
 app.use(cors({
@@ -27,12 +31,15 @@ app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Correct route mounting
+// Initialize Socket.IO service for analytics
+const socketService = new AnalyticsSocketService(server);
+app.set('socketService', socketService);
+
+// Route mounting
 app.use("/api/auth", authRoutes);
-app.use("/api/emails", emailRouter); // ✅ now using correct router
+app.use("/api/emails", massEmailRouter);
 app.use("/api/users", userRouter);
-// Optionally remove the duplicate if not needed
-// app.use('/api/email', require('./routes/email/emailRoutes'));
+app.use("/api/analytics", analyticsRouter);
 
 // Test route
 app.get('/api/test', (req, res) => {
@@ -50,6 +57,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`✅ Server is running on port ${PORT}`);
+    console.log(`🔥 Analytics and WebSocket service initialized`);
 });
