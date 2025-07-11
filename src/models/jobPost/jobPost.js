@@ -2,6 +2,14 @@ const mongoose = require('mongoose');
 const express = require('express');
 
 const jobPostSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        unique: true,
+        required: true,
+        default: function() {
+            return 'JOB' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
+        }
+    },
     jobTitle : {
         type : String,
         required : true
