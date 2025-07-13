@@ -7,6 +7,7 @@ const authRoutes = require("./routes/authRoutes");
 const massEmailRouter = require("./src/routers/email/massEmailRouter");
 const userRouter = require("./src/routers/user/user");
 const analyticsRouter = require("./src/routers/analytics/analyticsRouter");
+const notificationRouter = require("./src/routers/notification/notificationRouter");
 const { ActiveUsers } = require("./src/models/analytics/analytics");
 const { cleanupActiveUsers } = require("./src/controllers/analyticsController");
 const cors = require("cors");
@@ -165,10 +166,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/emails", massEmailRouter);
 app.use("/api/users", userRouter);
 app.use("/api/analytics", analyticsRouter);
+app.use("/api", notificationRouter); // Add notification routes
 
 // Test routes
 app.get('/', (req, res) => {
-    res.send('Server is running with Analytics!');
+    res.send('Server is running with Analytics and Notifications!');
 });
 
 app.get('/api/test', (req, res) => {
@@ -197,5 +199,5 @@ app.use((err, req, res, next) => {
 // Start server
 server.listen(PORT, () => {
     console.log(`✅ Server is running on port ${PORT}`);
-    console.log(`🔥 Analytics and WebSocket service initialized`);
+    console.log(`🔥 Analytics, WebSocket, and Notification services initialized`);
 });
