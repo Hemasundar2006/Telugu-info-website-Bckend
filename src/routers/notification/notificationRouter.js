@@ -21,6 +21,15 @@ const isAdmin = (req, res, next) => {
     }
 };
 
+// Test route without auth to check if router is working
+router.get("/test", (req, res) => {
+    res.json({ 
+        success: true, 
+        message: "Notification router is working!",
+        timestamp: new Date()
+    });
+});
+
 // Admin routes
 router.post("/admin/notifications", auth, isAdmin, createNotification);
 

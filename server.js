@@ -177,6 +177,22 @@ app.get('/api/test', (req, res) => {
     res.json({ success: true, message: 'Server is working!' });
 });
 
+// Test notification routes
+app.get('/api/notification-test', (req, res) => {
+    res.json({ 
+        success: true, 
+        message: 'Notification routes are accessible',
+        availableEndpoints: [
+            'GET /api/test (notification router test)',
+            'GET /api/notifications (requires auth)',
+            'GET /api/notifications/unread-count (requires auth)',
+            'POST /api/notifications/read (requires auth)',
+            'POST /api/notifications/read-all (requires auth)',
+            'POST /api/admin/notifications (requires admin auth)'
+        ]
+    });
+});
+
 // Test Socket.IO endpoint
 app.get('/api/socket-test', (req, res) => {
     res.json({ 

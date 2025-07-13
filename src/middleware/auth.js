@@ -13,7 +13,18 @@ const auth = async (req, res, next) => {
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await User.findById(decoded.id);
+        
+        // Check if decoded has id (your JWT structure)
+        const userId = decoded.id || decoded._id;
+        
+        if (!userId) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid token structure'
+            });
+        }
+
+        const user = await User.findById(userId);
 
         if (!user) {
             return res.status(401).json({
@@ -25,6 +36,7 @@ const auth = async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
+        console.error('Auth middleware error:', error);
         res.status(401).json({
             success: false,
             message: 'Invalid token'
