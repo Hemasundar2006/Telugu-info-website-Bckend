@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const notificationSchema = new mongoose.Schema({
     title: {
@@ -9,10 +9,6 @@ const notificationSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
     },
     isGlobal: {
         type: Boolean,
@@ -29,8 +25,8 @@ const notificationSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-// Index for better query performance
+// Add indexes for better performance
 notificationSchema.index({ createdAt: -1 });
 notificationSchema.index({ readBy: 1 });
 
-module.exports = mongoose.model("notification", notificationSchema); 
+module.exports = mongoose.model('notification', notificationSchema);
