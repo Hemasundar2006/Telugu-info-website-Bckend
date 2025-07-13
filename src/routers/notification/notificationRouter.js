@@ -1,29 +1,59 @@
 const express = require('express');
 const router = express.Router();
+const { body, validationResult } = require('express-validator');
 
 const {
-  createNotification,
-  getNotifications,
-  markAsRead,
-  markAllAsRead,
-  getUnreadCount
-} = require('../../controllers/notificationController'); // ✅ adjust path if needed
+    createNotification,
+    getNotifications,
+    getAdminNotifications,
+    markAsRead,
+    markAllAsRead,
+    getUnreadCount,
+    deleteNotification,
+    updateNotification
+} = require('../../controllers/notificationController');
 
-const { auth, isAdmin } = require('../../middleware/auth'); // ✅ adjust path if needed
+const { auth, isAdmin } = require('../../middleware/auth');
 
-// ✅ Admin sends global notification
-router.post('/admin/notifications', auth, isAdmin, createNotification);
+// Validation middleware
+const validateNotification = [
+    body('message')
+        .trim()
+        .isLength({ min: 1, max: 500 })
+        .withMessage('Message is required and must be less than 500 characters'),
+    body('title')
+        .optional()
+        .trim()
+        .isLength({ max: 100 })
+        .withMessage('Title must be less than 100 characters'),
+    body('notificationType')
+        .optional()
+        .isIn(['general', 'announcement', 'update', 'alert', 'reminder'])
+        .withMessage('Invalid notification type'),
+    body('priority')
+        .optional()
+        .isIn(['low', 'normal', 'high', 'urgent'])
+        .withMessage('Invalid priority level'),
+    body('targetAudience')
+        .optional()
+        .isIn(['all', 'registered', 'premium', 'admin'])
+        .withMessage('Invalid target audience'),
+    body('actionLink')
+        .optional()
+        .isURL()
+        .withMessage('Invalid action link URL')
+];
 
-// ✅ User gets notifications list
+// Admin routes
+router.post('/admin/notifications', auth, isAdmin, validateNotification, createNotification);
+router.get('/admin/notifications', auth, isAdmin, getAdminNotifications);
+router.delete('/admin/notifications/:notificationId', auth, isAdmin, deleteNotification);
+router.put('/admin/notifications/:notificationId', auth, isAdmin, validateNotification, updateNotification);
+
+// User routes
 router.get('/notifications', auth, getNotifications);
-
-// ✅ User gets unread count only
 router.get('/notifications/unread-count', auth, getUnreadCount);
-
-// ✅ User marks one notification as read
 router.post('/notifications/read', auth, markAsRead);
-
-// ✅ User marks all as read
 router.post('/notifications/read-all', auth, markAllAsRead);
 
 module.exports = router;

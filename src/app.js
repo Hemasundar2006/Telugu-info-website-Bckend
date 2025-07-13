@@ -12,6 +12,7 @@ const notificationRouter = require('./routers/notification/notificationRouter');
 const sessionMiddleware = require('./src/middleware/session');
 const { apiLimiter, authLimiter } = require('./src/middleware/rateLimit');
 const errorHandler = require('./src/middleware/errorHandler');
+const { startScheduledNotificationService } = require('./services/scheduledNotificationService');
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/telugu-info', {
@@ -45,6 +46,9 @@ app.use(errorHandler);
 
 app.use('/api/', apiLimiter);
 app.use('/api/auth/login', authLimiter);
+
+// Start scheduled notification service
+startScheduledNotificationService();
 
 // Error handling middleware
 app.use((err, req, res, next) => {
