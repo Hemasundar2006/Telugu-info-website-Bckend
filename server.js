@@ -38,6 +38,8 @@ const io = new Server(server, {
     }
 });
 
+
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -166,7 +168,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/emails", massEmailRouter);
 app.use("/api/users", userRouter);
 app.use("/api/analytics", analyticsRouter);
-app.use("/api", notificationRouter); // Add notification routes
+app.use("/api", notificationRouter);
 
 // Test routes
 app.get('/', (req, res) => {
@@ -193,7 +195,6 @@ app.get('/api/notification-test', (req, res) => {
     });
 });
 
-app.use("/api", notificationRouter);
 
 
 // Test Socket.IO endpoint

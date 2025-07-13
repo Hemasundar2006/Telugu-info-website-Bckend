@@ -1,28 +1,29 @@
 const express = require('express');
 const router = express.Router();
 
-const { auth, isAdmin } = require('../../middlewares/authMiddleware');
 const {
   createNotification,
   getNotifications,
-  getUnreadCount,
-  markNotificationRead,
-  markAllNotificationsRead
-} = require('../../controllers/notificationController');
+  markAsRead,
+  markAllAsRead,
+  getUnreadCount
+} = require('../../controllers/notificationController'); // ✅ adjust path if needed
 
-// ✅ Admin creates notification
-router.post("/admin/notifications", auth, isAdmin, createNotification);
+const { auth, isAdmin } = require('../../middleware/auth'); // ✅ adjust path if needed
 
-// ✅ Get all notifications for the logged-in user
-router.get("/notifications", auth, getNotifications);
+// ✅ Admin sends global notification
+router.post('/admin/notifications', auth, isAdmin, createNotification);
 
-// ✅ Get unread notification count for the logged-in user
-router.get("/notifications/unread-count", auth, getUnreadCount);
+// ✅ User gets notifications list
+router.get('/notifications', auth, getNotifications);
 
-// ✅ Mark a notification as read
-router.post("/notifications/read", auth, markNotificationRead);
+// ✅ User gets unread count only
+router.get('/notifications/unread-count', auth, getUnreadCount);
 
-// ✅ Mark all notifications as read
-router.post("/notifications/read-all", auth, markAllNotificationsRead);
+// ✅ User marks one notification as read
+router.post('/notifications/read', auth, markAsRead);
+
+// ✅ User marks all as read
+router.post('/notifications/read-all', auth, markAllAsRead);
 
 module.exports = router;
