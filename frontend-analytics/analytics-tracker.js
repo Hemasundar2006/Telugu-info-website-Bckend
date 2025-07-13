@@ -37,12 +37,29 @@ class AnalyticsTracker {
             await this.initializeSession();
             
             // Initialize WebSocket connection
-            if (typeof io !== 'undefined') {
-                console.log('Socket.IO library found, initializing WebSocket...');
-                this.initializeWebSocket();
-            } else {
-                console.error('Socket.IO library not found! Make sure to include socket.io.min.js before analytics-tracker.js');
-            }
+           // Add explicit error handling and reconnection logic
+initializeWebSocket() {
+    try {
+        this.socket = io(this.config.websocketUrl, {
+            reconnection: true,
+            reconnectionAttempts: 5,
+            reconnectionDelay: 1000
+        });
+        
+        this.socket.on('connect', () => {
+            console.log('WebSocket connected:', this.socket.id);
+            this.emitUserActivity();
+        });
+
+        this.socket.on('connect_error', (error) => {
+            console.error('WebSocket connection error:', error);
+            this.fallbackToHTTP();
+        });
+    } catch (error) {
+        console.error('Socket initialization failed:', error);
+        this.fallbackToHTTP();
+    }
+}
             
             // Set up event listeners
             this.setupEventListeners();

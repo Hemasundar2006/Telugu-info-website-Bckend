@@ -3,7 +3,57 @@ const router = express.Router();
 const Notification = require('../models/notification/notification'); // Adjust path as needed
 
 // POST /api/admin/notifications
-router.post('/notifications', async (req, res) => {
+const { body, validationResult } = require('express-validator');
+
+router.post('/notifications', 
+    [
+        body('title').trim().isLength({ min: 3 }).optional(),
+        body('message').trim().isLength({ min: 5 }).notEmpty(),
+        auth,
+        isAdmin
+    ],
+    async (req, res) => {
+        try {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({
+                    success: false,
+                    errors: errors.array()
+                });
+            }
+
+            const { title, message } = req.body;
+            const notification = new Notification({
+                title,
+                message,
+                isGlobal: true,
+                createdBy: req.user.id
+            });
+
+            await notification.save();
+
+            const io = req.app.get('io');
+            if (io) {
+                io.emit('new-notification', {
+                    notification: notification.toJSON()
+                });
+            }
+
+            res.json({
+                success: true,
+                message: 'Notification sent',
+                notification
+            });
+        } catch (error) {
+            console.error('Error creating notification:', error);
+            res.status(500).json({
+                success: false,
+                message: 'Error creating notification',
+                error: error.message
+            });
+        }
+    }
+);
   const { title, message } = req.body;
 
   if (!message && !title) {

@@ -13,13 +13,31 @@ const app = express();
 const server = require("http").createServer(app);
 
 // Enable CORS for all routes
+// Add proper CORS configuration
+const whitelist = [
+    process.env.FRONTEND_URL,
+    'http://localhost:3000',
+    'https://telugu-info.vercel.app'
+];
+
 app.use(cors({
-    origin: '*', // Allow all origins during development
+    origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    allowedHeaders: [
+        'Content-Type',
+        'Authorization',
+        'X-Requested-With',
+        'Accept'
+    ],
     exposedHeaders: ['Content-Range', 'X-Content-Range'],
     credentials: true,
-    maxAge: 86400 // 24 hours
+    maxAge: 86400
 }));
 
 // Handle preflight requests

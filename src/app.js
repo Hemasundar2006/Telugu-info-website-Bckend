@@ -9,6 +9,9 @@ const massEmailRouter = require('./routers/email/massEmailRouter');
 const authRouter = require('./routes/authRoutes');
 const { scheduleDailyQuizGeneration } = require('./services/quizCronService');
 const notificationRouter = require('./routers/notification/notificationRouter');
+const sessionMiddleware = require('./src/middleware/session');
+const { apiLimiter, authLimiter } = require('./src/middleware/rateLimit');
+const errorHandler = require('./src/middleware/errorHandler');
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/telugu-info', {
@@ -37,7 +40,11 @@ app.use('/api/emails', emailRouter);
 app.use('/api/mass-emails', massEmailRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/notifications', notificationRouter);
+app.use(sessionMiddleware);
+app.use(errorHandler);
 
+app.use('/api/', apiLimiter);
+app.use('/api/auth/login', authLimiter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

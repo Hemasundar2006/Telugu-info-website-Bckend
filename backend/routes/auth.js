@@ -35,13 +35,21 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.get('/users', verifyAdmin, async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json({ success: true, users });
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error', error: err.message });
-  }
+const { auth, isAdmin } = require('../middleware/auth');
+
+// Add proper middleware chain and error handling
+router.get('/users', auth, isAdmin, async (req, res) => {
+    try {
+        const users = await User.find().select('-password');
+        res.json({ success: true, users });
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error fetching users',
+            error: error.message
+        });
+    }
 });
 
 router.delete('/reject-user/:id', verifyAdmin, async (req, res) => {
