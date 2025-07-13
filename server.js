@@ -193,7 +193,8 @@ app.get('/api/notification-test', (req, res) => {
     });
 });
 
-router.post("/admin/notifications", auth, isAdmin, createNotification);
+app.use("/api", notificationRouter);
+
 
 // Test Socket.IO endpoint
 app.get('/api/socket-test', (req, res) => {

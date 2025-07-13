@@ -1,42 +1,28 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const auth = require("../../middleware/auth");
+
+const { auth, isAdmin } = require('../../middlewares/authMiddleware');
 const {
-    createNotification,
-    getNotifications,
-    markAsRead,
-    markAllAsRead,
-    getUnreadCount
-} = require("../../controllers/notificationController");
+  createNotification,
+  getNotifications,
+  getUnreadCount,
+  markNotificationRead,
+  markAllNotificationsRead
+} = require('../../controllers/notificationController');
 
-// Middleware to check if user is admin
-const isAdmin = (req, res, next) => {
-    if (req.user && req.user.role === 'admin') {
-        next();
-    } else {
-        res.status(403).json({
-            success: false,
-            message: "Access denied. Admin privileges required."
-        });
-    }
-};
-
-// Test route without auth to check if router is working
-router.get("/test", (req, res) => {
-    res.json({ 
-        success: true, 
-        message: "Notification router is working!",
-        timestamp: new Date()
-    });
-});
-
-// Admin routes
+// ✅ Admin creates notification
 router.post("/admin/notifications", auth, isAdmin, createNotification);
 
-// User routes
+// ✅ Get all notifications for the logged-in user
 router.get("/notifications", auth, getNotifications);
-router.post("/notifications/read", auth, markAsRead);
-router.post("/notifications/read-all", auth, markAllAsRead);
+
+// ✅ Get unread notification count for the logged-in user
 router.get("/notifications/unread-count", auth, getUnreadCount);
+
+// ✅ Mark a notification as read
+router.post("/notifications/read", auth, markNotificationRead);
+
+// ✅ Mark all notifications as read
+router.post("/notifications/read-all", auth, markAllNotificationsRead);
 
 module.exports = router;
