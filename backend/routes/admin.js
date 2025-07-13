@@ -1,58 +1,44 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User');
-const { sendApprovalEmail } = require('../config/email');
-const { verifyAdmin } = require('../middleware/auth');
+const Notification = require('../models/notification/notification'); // Adjust path as needed
 
-router.get('/pending-users', verifyAdmin, async (req, res) => {
-  try {
-    const users = await User.find({ isVerified: false });
-    res.json({ success: true, users });
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error', error: err.message });
+// POST /api/admin/notifications
+router.post('/notifications', async (req, res) => {
+  const { title, message } = req.body;
+
+  if (!message && !title) {
+    return res.status(400).json({ success: false, message: 'Message or title is required' });
   }
-});
 
-router.patch('/verify-user/:id', verifyAdmin, async (req, res) => {
-  try {
-    const user = await User.findByIdAndUpdate(req.params.id, { isVerified: true }, { new: true });
-    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
-    try {
-      await sendApprovalEmail(user.email, user.name);
-    } catch (emailErr) {
-      return res.status(500).json({ success: false, message: 'User verified, but failed to send email', error: emailErr.message });
-    }
-    res.json({ success: true, message: 'User verified' });
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error', error: err.message });
-  }
-});
+  // Combine title and message if both are present
+  const fullMessage = title ? (title + (message ? ': ' + message : '')) : message;
 
-router.delete('/reject-user/:id', verifyAdmin, async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
-    res.json({ success: true, message: 'User rejected and deleted' });
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error', error: err.message });
-  }
-});
-
-router.get('/user-stats', verifyAdmin, async (req, res) => {
-  try {
-    const total = await User.countDocuments();
-    const pending = await User.countDocuments({ isVerified: false });
-    const verified = await User.countDocuments({ isVerified: true });
-    res.json({
-      success: true,
-      stats: {
-        total,
-        pending,
-        verified
-      }
+    // Save to DB
+    const notification = new Notification({
+      message: fullMessage,
+      isGlobal: true,
+      createdBy: req.user ? req.user.id : null // If you have auth, otherwise remove this
     });
+    await notification.save();
+
+    // Emit to all clients via Socket.IO if available
+    const io = req.app.get('io');
+    if (io) {
+      io.emit('new-notification', {
+        notification: {
+          _id: notification._id,
+          message: notification.message,
+          createdAt: notification.createdAt,
+          isGlobal: notification.isGlobal
+        }
+      });
+    }
+
+    res.json({ success: true, message: 'Notification sent', notification });
   } catch (err) {
-    res.status(500).json({ success: false, message: 'Server error', error: err.message });
+    console.error('Error sending notification:', err);
+    res.status(500).json({ success: false, message: 'Error sending notification', error: err.message });
   }
 });
 
