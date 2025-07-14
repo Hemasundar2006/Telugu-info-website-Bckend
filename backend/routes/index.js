@@ -10,4 +10,6 @@ router.use('/api', notificationRouter);
 // Admin routes
 router.use('/api/admin', auth, isAdmin, adminRouter);
 
+
+
 module.exports = router;
