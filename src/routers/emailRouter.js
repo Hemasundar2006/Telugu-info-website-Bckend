@@ -53,111 +53,115 @@ router.post('/newsletter/subscribe', async (req, res) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Welcome to Telugu Info</title>
             </head>
-            <body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa;">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f8f9fa;">
+            <body style="margin: 0; padding: 0; font-family: 'Arial', sans-serif; background-color: #f4f6f8;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f4f6f8;">
                     <tr>
                         <td align="center" style="padding: 40px 20px;">
                             <!-- Main Container -->
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width: 600px; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); overflow: hidden;">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width: 600px; background-color: #ffffff; border-radius: 16px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); overflow: hidden;">
                                 
-                                <!-- Header Section -->
+                                <!-- Header Section with Logo -->
                                 <tr>
-                                    <td style="background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%); padding: 40px 30px; text-align: center;">
-                                        <h1 style="margin: 0; color: #ffffff; font-size: 32px; font-weight: 700; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-                                            🎯 Welcome to Telugu Info!
+                                    <td style="background: linear-gradient(120deg, #4A90E2 0%, #5C6BC0 100%); padding: 45px 30px; text-align: center;">
+                                        <img src="https://telugu.info/logo.png" alt="Telugu Info Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
+                                        <h1 style="margin: 0; color: #ffffff; font-size: 36px; font-weight: 800; letter-spacing: -0.5px;">
+                                            Welcome to Telugu Info!
                                         </h1>
-                                        <p style="margin: 10px 0 0 0; color: #ffffff; font-size: 18px; opacity: 0.9;">
-                                            Job & Exam Updates Subscription Confirmed
+                                        <p style="margin: 15px 0 0 0; color: #ffffff; font-size: 20px; font-weight: 300;">
+                                            Your Gateway to Career Success
                                         </p>
                                     </td>
                                 </tr>
                                 
-                                <!-- Content Section -->
+                                <!-- Welcome Message -->
                                 <tr>
-                                    <td style="padding: 40px 30px;">
-                                        <h2 style="margin: 0 0 20px 0; color: #2c3e50; font-size: 24px; font-weight: 600;">
-                                            Hello! 👋
+                                    <td style="padding: 40px 30px 20px;">
+                                        <h2 style="margin: 0 0 25px 0; color: #1a1a1a; font-size: 28px; font-weight: 700;">
+                                            Your Journey Begins Here! 🚀
                                         </h2>
                                         
-                                        <p style="margin: 0 0 20px 0; color: #555; font-size: 16px; line-height: 1.6;">
-                                            Thank you for joining the <strong>Telugu Info</strong> family! We're excited to have you as part of our growing community of job seekers and students.
+                                        <p style="margin: 0 0 25px 0; color: #444444; font-size: 17px; line-height: 1.7;">
+                                            Thank you for joining <strong>Telugu Info</strong>! You've taken the first step towards transforming your career. Get ready to receive personalized updates that matter to you.
                                         </p>
-                                        
-                                        <p style="margin: 0 0 20px 0; color: #555; font-size: 16px; line-height: 1.6;">
-                                            You'll now receive our carefully curated job and exam updates including:
-                                        </p>
-                                        
-                                        <!-- Features List -->
-                                        <div style="margin: 25px 0; padding: 20px; background-color: #f8f9fa; border-radius: 8px; border-left: 4px solid #FF6B35;">
-                                            <ul style="margin: 0; padding-left: 20px; color: #555; font-size: 16px; line-height: 1.8;">
-                                                <li><strong>💼 Job Notifications:</strong> Latest government and private sector openings</li>
-                                                <li><strong>📝 Exam Details:</strong> Important exam dates, notifications, and results</li>
-                                                <li><strong>🎓 Educational Updates:</strong> University admissions, courses, and scholarships</li>
-                                                <li><strong>🏢 Career Opportunities:</strong> Internships, training programs, and career guidance</li>
-                                                <li><strong>📊 Study Materials:</strong> Exam preparation resources and study tips</li>
-                                            </ul>
-                                        </div>
-                                        
-                                        <p style="margin: 25px 0; color: #555; font-size: 16px; line-height: 1.6;">
-                                            Stay ahead in your career journey and never miss important job opportunities or exam notifications!
-                                        </p>
-                                        
-                                        <!-- CTA Button -->
-                                        <div style="text-align: center; margin: 30px 0;">
-                                            <a href="#" style="display: inline-block; background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%); color: #ffffff; text-decoration: none; padding: 15px 30px; border-radius: 25px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);">
-                                                Browse Latest Jobs & Exams
-                                            </a>
+                                    </td>
+                                </tr>
+
+                                <!-- What You'll Get Section -->
+                                <tr>
+                                    <td style="padding: 0 30px 30px;">
+                                        <div style="background: #f8faff; border-radius: 12px; padding: 25px;">
+                                            <h3 style="margin: 0 0 20px 0; color: #2c3e50; font-size: 20px; font-weight: 600;">
+                                                🎯 What's in Store for You:
+                                            </h3>
+                                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                <tr>
+                                                    <td style="padding: 10px 0;">
+                                                        <div style="display: flex; align-items: center;">
+                                                            <span style="background: #4A90E2; border-radius: 50%; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                                                <span style="color: #ffffff; font-size: 16px;">💼</span>
+                                                            </span>
+                                                            <span style="color: #444444; font-size: 16px;">Premium Job Alerts</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 10px 0;">
+                                                        <div style="display: flex; align-items: center;">
+                                                            <span style="background: #4A90E2; border-radius: 50%; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                                                <span style="color: #ffffff; font-size: 16px;">📝</span>
+                                                            </span>
+                                                            <span style="color: #444444; font-size: 16px;">Exam Updates & Notifications</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 10px 0;">
+                                                        <div style="display: flex; align-items: center;">
+                                                            <span style="background: #4A90E2; border-radius: 50%; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px;">
+                                                                <span style="color: #ffffff; font-size: 16px;">🎓</span>
+                                                            </span>
+                                                            <span style="color: #444444; font-size: 16px;">Educational Resources</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </td>
                                 </tr>
-                                
-                                <!-- Social Media Section -->
+
+                                <!-- CTA Section -->
                                 <tr>
-                                    <td style="padding: 0 30px 30px 30px;">
-                                        <div style="text-align: center; padding: 20px 0; border-top: 1px solid #e9ecef;">
-                                                                                    <p style="margin: 0 0 15px 0; color: #6c757d; font-size: 14px;">
-                                            Follow us for instant job & exam notifications:
-                                        </p>
-                                            <div style="margin: 0 auto; max-width: 200px;">
-                                                <a href="#" style="display: inline-block; margin: 0 10px; color: #FF6B35; text-decoration: none; font-size: 20px;">
-                                                    📘 Facebook
-                                                </a>
-                                                <a href="#" style="display: inline-block; margin: 0 10px; color: #FF6B35; text-decoration: none; font-size: 20px;">
-                                                    📷 Instagram
-                                                </a>
-                                                <a href="#" style="display: inline-block; margin: 0 10px; color: #FF6B35; text-decoration: none; font-size: 20px;">
-                                                    🐦 Twitter
-                                                </a>
-                                            </div>
+                                    <td style="padding: 20px 30px 40px;">
+                                        <div style="text-align: center;">
+                                            <a href="https://telugu-info.vercel.app/" style="display: inline-block; background: linear-gradient(120deg, #4A90E2 0%, #5C6BC0 100%); color: #ffffff; text-decoration: none; padding: 16px 35px; border-radius: 30px; font-weight: 600; font-size: 18px; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(74, 144, 226, 0.35);">
+                                                Explore Opportunities
+                                            </a>
+                                            <p style="margin: 20px 0 0 0; color: #666666; font-size: 15px;">
+                                                Your next big opportunity awaits!
+                                            </p>
                                         </div>
                                     </td>
                                 </tr>
-                                
-                                <!-- Footer Section -->
+
+
+
+                                <!-- Footer -->
                                 <tr>
-                                    <td style="background-color: #2c3e50; padding: 30px; text-align: center;">
-                                        <p style="margin: 0 0 10px 0; color: #ffffff; font-size: 14px;">
-                                            <strong>Telugu Info</strong> - Your Career & Education Partner
+                                    <td style="background-color: #1a1a1a; padding: 35px 30px; text-align: center;">
+                                        <p style="margin: 0 0 15px 0; color: #ffffff; font-size: 15px; font-weight: 600;">
+                                            Telugu Info - Empowering Careers, Enriching Lives
                                         </p>
-                                        <p style="margin: 0 0 15px 0; color: #bdc3c7; font-size: 12px; line-height: 1.5;">
-                                            This email was sent to ${email} because you subscribed to our newsletter.
+                                        <p style="margin: 0 0 20px 0; color: #9ea3a9; font-size: 13px; line-height: 1.6;">
+                                            You're receiving this email because you subscribed to updates from Telugu Info.<br>
+                                            Email sent to: ${email}
                                         </p>
-                                        <div style="margin: 20px 0 0 0;">
-                                            <a href="#" style="color: #FF6B35; text-decoration: none; font-size: 12px; margin: 0 10px;">
-                                                Unsubscribe
-                                            </a>
-                                            <span style="color: #bdc3c7; font-size: 12px;">|</span>
-                                            <a href="#" style="color: #FF6B35; text-decoration: none; font-size: 12px; margin: 0 10px;">
-                                                Privacy Policy
-                                            </a>
-                                            <span style="color: #bdc3c7; font-size: 12px;">|</span>
-                                            <a href="#" style="color: #FF6B35; text-decoration: none; font-size: 12px; margin: 0 10px;">
-                                                Contact Us
-                                            </a>
+                                        <div style="margin: 0;">
+                                            <a href="#" style="color: #4A90E2; text-decoration: none; font-size: 13px; margin: 0 10px;">Unsubscribe</a>
+                                            <span style="color: #666666;">|</span>
+                                            <a href="#" style="color: #4A90E2; text-decoration: none; font-size: 13px; margin: 0 10px;">Privacy Policy</a>
+                                            <span style="color: #666666;">|</span>
+                                            <a href="#" style="color: #4A90E2; text-decoration: none; font-size: 13px; margin: 0 10px;">Contact Us</a>
                                         </div>
-                                        <p style="margin: 15px 0 0 0; color: #95a5a6; font-size: 11px;">
-                                            If you didn't subscribe to our newsletter, please ignore this email.
-                                        </p>
                                     </td>
                                 </tr>
                             </table>
