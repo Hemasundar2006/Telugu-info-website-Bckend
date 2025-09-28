@@ -5,7 +5,6 @@ async function testEmail() {
     
     // List of email recipients
     const recipients = [
-        'marotinani06@gmail.com',
         'nadimintihemalatha96@gmail.com',
         'hemasaiamujuri3@gmail.com',
         'marothihemasundar03@gmail.com',
@@ -46,6 +45,26 @@ async function testEmail() {
         'hiteshganni007@gmail.com',
         'sam0cypher@gmail.com',
         'kiransomulakiran@gmail.com',
+        'gptgamerz51@gmail.com',
+        'jamisabareesh74@gmail.com',
+        'lohithvasantha50@gmail.com',
+        'deepikajagarana2007@gmail.com',
+        'moditeja029@gmail.com',
+        'gopal.antyakula19@gmail.com',
+        'marotikesava@gmail.com',
+        'teja4028@gmail.com',
+        'abhichichulla@gmail.com',
+        'dasarimaneesha91@gmail.com',
+        'krishnaballanki472@gmail.com',
+        'kummaritirupathi8@gmail.com',
+        'mrroodboy1@gmail.com',
+        'mysterioustruths23@gmail.com',
+        'ananthasaiananthasai40@gmail.com',
+        'chirikikishorkumar@gmail.com',
+        'gowthamiec020@gmail.com',
+        'rohithvarri98@gmail.com',
+        'umashankarnaidu71@gmail.com',
+        'kick@123gmail.com',
         'jayashreenaidu04@gmail.com',
         'manichindiri@gmail.com',
         'magesh12092004@gmail.com',
@@ -64,8 +83,12 @@ async function testEmail() {
         'smilykingtejasaikumar@gmail.com',
         'yamunathuta1@gmail.com',
         'jyothsnapatnana@gmail.com',
-        'mahadevumatha@gmail.com', 
+        'mahavumatha@gmail.com',
         'pogirihari617@gmail.com',
+        'marotinani06@gmail.com',
+        'gireeshpurli@gmail.com',
+        
+        
     ];
 
     console.log(`Sending welcome emails to ${recipients.length} recipients...`);

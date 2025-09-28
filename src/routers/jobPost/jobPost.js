@@ -1,8 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const crypto = require('crypto');
 const jobPostDB = require('../../models/jobPost/jobPost');
 const Subscription = require('../../models/subscription/subscription');
 const { sendEmail } = require('../../config/emailConfig');
+
+// Base URL for shareable links - replace with your frontend URL in production
+const BASE_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 const router = express.Router();
 
@@ -368,5 +372,90 @@ Telugu Info - Your Career & Education Partner
 You received this email because you're subscribed to job notifications.
     `;
 }
+
+// Generate shareable link for a job post
+router.post('/generate-share-link/:id', async (req, res) => {
+    try {
+        const jobPost = await jobPostDB.findById(req.params.id);
+        if (!jobPost) {
+            return res.status(404).json({ success: false, message: "Job post not found" });
+        }
+
+        // If shareableLink doesn't exist, generate one
+        if (!jobPost.shareableLink) {
+            // Generate a unique hash for the job post
+            const hash = crypto.randomBytes(8).toString('hex');
+            jobPost.shareableLink = `${BASE_URL}/job/${jobPost.id}/${hash}`;
+            await jobPost.save();
+        }
+
+        res.status(200).json({
+            success: true,
+            data: {
+                shareableLink: jobPost.shareableLink,
+                socialLinks: {
+                    whatsapp: `https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out this job opportunity: ${jobPost.jobTitle} at ${jobPost.companyName}\n${jobPost.shareableLink}`)}`,
+                    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(jobPost.shareableLink)}`,
+                    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out this job opportunity: ${jobPost.jobTitle} at ${jobPost.companyName}`)}&url=${encodeURIComponent(jobPost.shareableLink)}`,
+                    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(jobPost.shareableLink)}`
+                }
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
+// Track social media shares
+router.post('/track-share/:id', async (req, res) => {
+    try {
+        const { platform } = req.body;
+        const validPlatforms = ['whatsapp', 'linkedin', 'twitter', 'facebook'];
+        
+        if (!validPlatforms.includes(platform)) {
+            return res.status(400).json({ success: false, message: "Invalid sharing platform" });
+        }
+
+        const jobPost = await jobPostDB.findById(req.params.id);
+        if (!jobPost) {
+            return res.status(404).json({ success: false, message: "Job post not found" });
+        }
+
+        // Increment the specific platform counter and total share count
+        jobPost.socialShares[platform]++;
+        jobPost.shareCount++;
+        await jobPost.save();
+
+        res.status(200).json({
+            success: true,
+            data: {
+                shareCount: jobPost.shareCount,
+                socialShares: jobPost.socialShares
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
+// Get share statistics for a job post
+router.get('/share-stats/:id', async (req, res) => {
+    try {
+        const jobPost = await jobPostDB.findById(req.params.id);
+        if (!jobPost) {
+            return res.status(404).json({ success: false, message: "Job post not found" });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: {
+                shareCount: jobPost.shareCount,
+                socialShares: jobPost.socialShares
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
 
 module.exports = router;
