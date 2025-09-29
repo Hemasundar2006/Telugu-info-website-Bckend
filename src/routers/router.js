@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const userRouter = require("./user/user")
-const jobPostRouter = require("./jobPost/jobPost")
-
+const userRouter = require("./user/user");
+const jobPostRouter = require("./jobPost/jobPost");
+const internshipRouter = require("./internship/internship");
+const scholarshipRouter = require("./scholarship/scholarship");
 
 router.use("/user", userRouter);
-
 router.use("/jobPost", jobPostRouter);
+router.use("/internship", internshipRouter);
+router.use("/scholarship", scholarshipRouter);
 
 module.exports = router;
