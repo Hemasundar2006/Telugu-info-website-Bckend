@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const User = require('../models/User');
-const { sendEmail } = require('../utils/sendEmail');
+const { sendEmail } = require('../config/emailConfig');
 require('dotenv').config();
 
 /**
@@ -123,7 +123,12 @@ const forgotPassword = async (req, res) => {
             </html>
         `;
 
-        const emailResult = await sendEmail(user.email, 'Password Reset Request - Telugu Info', emailHtml);
+        const emailResult = await sendEmail(
+            user.email,
+            'Password Reset Request - Telugu Info',
+            'We received a request to reset your password. If this was you, use the link to reset your password.',
+            emailHtml
+        );
 
         if (!emailResult.success) {
             user.resetToken = null;
@@ -274,6 +279,7 @@ const resetPassword = async (req, res) => {
         const emailResult = await sendEmail(
             user.email,
             'Password Changed Successfully - Telugu Info',
+            'Your password has been changed successfully.',
             confirmationEmailHtml
         );
 
