@@ -8,13 +8,11 @@ const quizRouter = require('./routers/quiz/quizRouter');
 const emailRouter = require('./routers/email/emailRouter');
 const massEmailRouter = require('./routers/email/massEmailRouter');
 const authRouter = require('./routes/authRoutes');
-const notificationRouter = require('./routers/notification/notificationRouter');
 
 const sessionMiddleware = require('./src/middleware/session');
 const { apiLimiter, authLimiter } = require('./src/middleware/rateLimit');
 const errorHandler = require('./src/middleware/errorHandler');
 const { scheduleDailyQuizGeneration } = require('./services/quizCronService');
-const { startScheduledNotificationService } = require('./services/scheduledNotificationService');
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/telugu-info', {
@@ -40,8 +38,7 @@ app.use('/api/emails', emailRouter);
 app.use('/api/mass-emails', massEmailRouter);
 app.use('/api/auth', authRouter);
 
-// ✅ Mount the admin notifications router at /api/admin
-app.use('/api/admin', notificationRouter);
+// Notifications removed
 
 app.use(sessionMiddleware);
 app.use(errorHandler);
@@ -49,8 +46,7 @@ app.use(errorHandler);
 app.use('/api/', apiLimiter);
 app.use('/api/auth/login', authLimiter);
 
-// Start scheduled notification service
-startScheduledNotificationService();
+// Scheduled notification service removed
 
 // Error handling fallback
 app.use((err, req, res, next) => {

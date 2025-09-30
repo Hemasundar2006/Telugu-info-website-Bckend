@@ -1,14 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const notificationRouter = require('./notification/notificationRouter');
-const adminRouter = require('./admin/adminRouter');
-const { auth, isAdmin } = require('../middleware/auth');
+// Admin router removed (notifications disabled)
+// const adminRouter = require('./admin/adminRouter');
+// const { auth, isAdmin } = require('../middleware/auth');
 
-// User routes
-router.use('/api', notificationRouter);
+// Notification routes removed
 
-// Admin routes
-router.use('/api/admin', auth, isAdmin, adminRouter);
+// Admin routes removed (notifications disabled)
 
 
 

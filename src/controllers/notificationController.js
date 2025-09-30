@@ -1,5 +1,4 @@
-const Notification = require('../models/notification/notification');
-const User = require('../models/user/user');
+// Notifications removed
 
 // Create a new notification (Admin only)
 exports.createNotification = async (req, res) => {
