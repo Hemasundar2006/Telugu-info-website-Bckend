@@ -31,6 +31,34 @@ router.get("/all-jobPost", async (req, res) => {
     }
 });
 
+// Get job posts count with optional filters
+router.get('/count-jobPost', async (req, res) => {
+    try {
+        const { search, location, jobType, workMode, isActive, isFeatured } = req.query;
+
+        const query = { isDeleted: { $ne: true } };
+
+        if (search) {
+            query.$or = [
+                { jobTitle: { $regex: search, $options: 'i' } },
+                { companyName: { $regex: search, $options: 'i' } },
+                { description: { $regex: search, $options: 'i' } }
+            ];
+        }
+
+        if (location) query.location = { $regex: location, $options: 'i' };
+        if (jobType) query.jobType = jobType;
+        if (workMode) query.workMode = workMode;
+        if (typeof isActive !== 'undefined') query.isActive = isActive === 'true';
+        if (typeof isFeatured !== 'undefined') query.isFeatured = isFeatured === 'true';
+
+        const count = await jobPostDB.countDocuments(query);
+        res.status(200).json({ success: true, data: { count } });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
 
 router.get('/get-jobPost/:id', async (req, res) => {
     try {
