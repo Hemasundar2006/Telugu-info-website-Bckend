@@ -8,6 +8,7 @@ const quizRouter = require('./routers/quiz/quizRouter');
 const emailRouter = require('./routers/email/emailRouter');
 const massEmailRouter = require('./routers/email/massEmailRouter');
 const authRouter = require('./routes/authRoutes');
+const courseRouter = require('./routers/course/courseRouter');
 
 const sessionMiddleware = require('./src/middleware/session');
 const { apiLimiter, authLimiter } = require('./src/middleware/rateLimit');
@@ -37,6 +38,7 @@ app.use('/api/quiz', quizRouter);
 app.use('/api/emails', emailRouter);
 app.use('/api/mass-emails', massEmailRouter);
 app.use('/api/auth', authRouter);
+app.use('/api', courseRouter);
 
 // Notifications removed
 
