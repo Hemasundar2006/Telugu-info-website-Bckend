@@ -9,6 +9,47 @@ const userProfileSchema = new mongoose.Schema({
     unique: true
   },
 
+  // Professional Experience
+  experience: [{
+    title: { type: String, required: true },
+    company: { type: String, required: true },
+    location: { type: String, required: false },
+    startDate: { type: Date, required: true },
+    endDate: { type: Date, required: false },
+    current: { type: Boolean, default: false },
+    description: { type: String, required: false }
+  }],
+
+  // Projects
+  projects: [{
+    name: { type: String, required: true },
+    role: { type: String, required: false },
+    description: { type: String, required: false },
+    techStack: [{ type: String }],
+    links: {
+      github: { type: String, required: false },
+      demo: { type: String, required: false }
+    },
+    startDate: { type: Date, required: false },
+    endDate: { type: Date, required: false },
+    highlights: [{ type: String }]
+  }],
+
+  // Resume file metadata (store URL only in DB)
+  resume: {
+    url: { type: String, required: false },
+    fileName: { type: String, required: false },
+    updatedAt: { type: Date, required: false }
+  },
+
+  // Video resume metadata (store URL only in DB)
+  videoResume: {
+    url: { type: String, required: false },
+    durationSec: { type: Number, required: false },
+    thumbnailUrl: { type: String, required: false },
+    updatedAt: { type: Date, required: false }
+  },
+
   // Personal Details
   personalDetails: {
     firstName: {

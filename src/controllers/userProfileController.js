@@ -139,6 +139,30 @@ const updatePersonalDetails = async (req, res) => {
   }
 };
 
+// Upload and set profile picture
+const uploadProfilePicture = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: 'No image provided' });
+    }
+
+    const fileName = req.file.originalname;
+    const url = `/uploads/profile/${Date.now()}_${fileName}`;
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $set: { 'personalDetails.profilePicture': url } },
+      { new: true, runValidators: true, upsert: true }
+    );
+
+    res.status(200).json({ success: true, message: 'Profile picture updated', data: userProfile.personalDetails.profilePicture });
+  } catch (error) {
+    console.error('Upload profile picture error:', error);
+    res.status(500).json({ success: false, message: 'Failed to upload profile picture', error: error.message });
+  }
+};
+
 /**
  * Update Contact Details
  */
@@ -230,6 +254,208 @@ const addQualification = async (req, res) => {
 };
 
 
+
+/**
+ * Experience CRUD
+ */
+const updateExperience = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const experience = req.body; // expects array
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $set: { experience } },
+      { new: true, runValidators: true, upsert: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: 'Experience updated successfully',
+      data: userProfile.experience
+    });
+  } catch (error) {
+    console.error('Update experience error:', error);
+    res.status(500).json({ success: false, message: 'Failed to update experience', error: error.message });
+  }
+};
+
+const addExperience = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const item = req.body; // single experience object
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $push: { experience: item } },
+      { new: true, runValidators: true, upsert: true }
+    );
+
+    res.status(200).json({ success: true, message: 'Experience added', data: userProfile.experience });
+  } catch (error) {
+    console.error('Add experience error:', error);
+    res.status(500).json({ success: false, message: 'Failed to add experience', error: error.message });
+  }
+};
+
+const deleteExperience = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { id } = req.params;
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $pull: { experience: { _id: id } } },
+      { new: true }
+    );
+
+    res.status(200).json({ success: true, message: 'Experience deleted', data: userProfile?.experience || [] });
+  } catch (error) {
+    console.error('Delete experience error:', error);
+    res.status(500).json({ success: false, message: 'Failed to delete experience', error: error.message });
+  }
+};
+
+/**
+ * Projects CRUD
+ */
+const updateProjects = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const projects = req.body; // expects array
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $set: { projects } },
+      { new: true, runValidators: true, upsert: true }
+    );
+
+    res.status(200).json({ success: true, message: 'Projects updated successfully', data: userProfile.projects });
+  } catch (error) {
+    console.error('Update projects error:', error);
+    res.status(500).json({ success: false, message: 'Failed to update projects', error: error.message });
+  }
+};
+
+const addProject = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const project = req.body; // single project
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $push: { projects: project } },
+      { new: true, runValidators: true, upsert: true }
+    );
+
+    res.status(200).json({ success: true, message: 'Project added', data: userProfile.projects });
+  } catch (error) {
+    console.error('Add project error:', error);
+    res.status(500).json({ success: false, message: 'Failed to add project', error: error.message });
+  }
+};
+
+const deleteProject = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { id } = req.params;
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $pull: { projects: { _id: id } } },
+      { new: true }
+    );
+
+    res.status(200).json({ success: true, message: 'Project deleted', data: userProfile?.projects || [] });
+  } catch (error) {
+    console.error('Delete project error:', error);
+    res.status(500).json({ success: false, message: 'Failed to delete project', error: error.message });
+  }
+};
+
+/**
+ * Resume and Video Resume (URL-based)
+ */
+const updateResume = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    // If file uploaded via multer, it will be available as req.file
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: 'No resume file provided' });
+    }
+
+    // In a real app, upload req.file.buffer to cloud storage (S3, Cloudinary)
+    // For now, simulate storing a generated URL
+    const fileName = req.file.originalname;
+    const url = `/uploads/resumes/${Date.now()}_${fileName}`;
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $set: { resume: { url, fileName, updatedAt: new Date() } } },
+      { new: true, runValidators: true, upsert: true }
+    );
+
+    res.status(200).json({ success: true, message: 'Resume uploaded', data: userProfile.resume });
+  } catch (error) {
+    console.error('Update resume error:', error);
+    res.status(500).json({ success: false, message: 'Failed to update resume', error: error.message });
+  }
+};
+
+const deleteResume = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $unset: { resume: '' } },
+      { new: true }
+    );
+    res.status(200).json({ success: true, message: 'Resume removed', data: userProfile?.resume || null });
+  } catch (error) {
+    console.error('Delete resume error:', error);
+    res.status(500).json({ success: false, message: 'Failed to delete resume', error: error.message });
+  }
+};
+
+const updateVideoResume = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    if (!req.file) {
+      return res.status(400).json({ success: false, message: 'No video file provided' });
+    }
+
+    const fileName = req.file.originalname;
+    const url = `/uploads/video-resumes/${Date.now()}_${fileName}`;
+    const durationSec = req.body.durationSec ? Number(req.body.durationSec) : undefined;
+    const thumbnailUrl = req.body.thumbnailUrl;
+
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $set: { videoResume: { url, durationSec, thumbnailUrl, updatedAt: new Date() } } },
+      { new: true, runValidators: true, upsert: true }
+    );
+
+    res.status(200).json({ success: true, message: 'Video resume uploaded', data: userProfile.videoResume });
+  } catch (error) {
+    console.error('Update video resume error:', error);
+    res.status(500).json({ success: false, message: 'Failed to update video resume', error: error.message });
+  }
+};
+
+const deleteVideoResume = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const userProfile = await UserProfile.findOneAndUpdate(
+      { userId },
+      { $unset: { videoResume: '' } },
+      { new: true }
+    );
+    res.status(200).json({ success: true, message: 'Video resume removed', data: userProfile?.videoResume || null });
+  } catch (error) {
+    console.error('Delete video resume error:', error);
+    res.status(500).json({ success: false, message: 'Failed to delete video resume', error: error.message });
+  }
+};
 
 /**
  * Update Extracurricular Activities
@@ -480,6 +706,17 @@ module.exports = {
   addEmergencyContact,
   updateAdditionalInfo,
   deleteProfile,
-  getAllProfiles
+  getAllProfiles,
+  updateExperience,
+  addExperience,
+  deleteExperience,
+  updateProjects,
+  addProject,
+  deleteProject,
+  updateResume,
+  deleteResume,
+  updateVideoResume,
+  deleteVideoResume
+  ,uploadProfilePicture
 };
 
