@@ -6,11 +6,13 @@ const jobPostRouter = require("./jobPost/jobPost");
 const internshipRouter = require("./internship/internship");
 const scholarshipRouter = require("./scholarship/scholarship");
 const partTimeJobRouter = require("./partTimeJob/partTimeJob");
+const userProfileRouter = require("./userProfile/userProfileRouter");
 
 router.use("/user", userRouter);
 router.use("/jobPost", jobPostRouter);
 router.use("/internship", internshipRouter);
 router.use("/scholarship", scholarshipRouter);
 router.use("/partTime", partTimeJobRouter);
+router.use("/user-profile", userProfileRouter);
 
 module.exports = router;
