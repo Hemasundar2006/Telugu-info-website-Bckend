@@ -28,7 +28,7 @@ const {
 } = require('../../controllers/userProfileController');
 
 // Middleware for authentication (you may need to adjust this based on your auth middleware)
-const auth = require('../../middleware/auth');
+const { auth } = require('../../middleware/auth');
 const { uploadResume, uploadVideo, uploadImage } = require('../../middleware/upload');
 
 // Apply authentication middleware to all routes
