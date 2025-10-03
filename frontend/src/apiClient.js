@@ -25,16 +25,19 @@ function clearTokenAndRedirect() {
   // Optional: window.location.href = "/login";
 }
 
-function isPublicUrl(url) {
+function isPublicRequest(method, url) {
   const path = url.replace(API_BASE, "");
-  return [
+  const publicPrefixes = [
     "/api/courses",
     "/api/courses-featured",
     "/api/quiz",
     "/api/feedback",
     "/api/auth/forgot-password",
     "/api/auth/reset-password",
-  ].some(prefix => path.startsWith(prefix));
+  ];
+  const isPublicPath = publicPrefixes.some(prefix => path.startsWith(prefix));
+  // Only treat these as public for safe, read-only GET requests
+  return (method || "get").toLowerCase() === "get" && isPublicPath;
 }
 
 export const api = axios.create({
@@ -49,7 +52,8 @@ export const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const fullUrl = (config.baseURL || "") + (config.url || "");
-    if (!isPublicUrl(fullUrl)) {
+    const method = (config.method || "get").toLowerCase();
+    if (!isPublicRequest(method, fullUrl)) {
       const token = getToken();
       if (!token || isJwtExpired(token)) {
         clearTokenAndRedirect();
