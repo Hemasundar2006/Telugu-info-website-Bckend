@@ -34,7 +34,7 @@ async function fetchUrlPreview(targetUrl) {
     }
 }
 
-router.post('/courses', auth, isAdmin, async (req, res) => {
+router.post('/courses', async (req, res) => {
     try {
         const { autoPreview, title, url } = req.body;
         if (!title || !url) {
