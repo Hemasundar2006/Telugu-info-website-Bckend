@@ -36,6 +36,7 @@ function isPublicRequest(method, url) {
   const publicGetOnly = [
     "/api/courses",
     "/api/courses-featured",
+    "/api/courses/", // covers /api/courses/:id and /api/courses/:id/share
     "/api/quiz",
     "/api/feedback",
   ];

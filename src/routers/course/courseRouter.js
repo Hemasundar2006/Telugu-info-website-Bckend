@@ -116,6 +116,41 @@ router.get('/courses/:id', async (req, res) => {
     }
 });
 
+// Public: get shareable link and social URLs (lazily generate link)
+router.get('/courses/:id/share', async (req, res) => {
+    try {
+        const course = await Course.findById(req.params.id);
+        if (!course || course.isDeleted) {
+            return res.status(404).json({ success: false, message: 'Course not found' });
+        }
+        if (!course.isShareable) {
+            return res.status(403).json({ success: false, message: 'Sharing disabled for this course' });
+        }
+
+        const BASE_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+        if (!course.shareableLink) {
+            const hash = crypto.randomBytes(8).toString('hex');
+            course.shareableLink = `${BASE_URL}/course/${course.id}/${hash}`;
+            await course.save();
+        }
+
+        return res.status(200).json({
+            success: true,
+            data: {
+                shareableLink: course.shareableLink,
+                socialLinks: {
+                    whatsapp: `https://api.whatsapp.com/send?text=${encodeURIComponent(`Check out this course: ${course.title}\n${course.shareableLink}`)}`,
+                    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(course.shareableLink)}`,
+                    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out this course: ${course.title}`)}&url=${encodeURIComponent(course.shareableLink)}`,
+                    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(course.shareableLink)}`
+                }
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+});
+
 router.patch('/courses/:id', auth, isAdmin, async (req, res) => {
     try {
         const { autoPreview, url } = req.body;
