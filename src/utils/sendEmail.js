@@ -44,7 +44,7 @@ const sendEmail = async (to, subject, html) => {
         console.log(`📧 Sending email to: ${to}`);
 
         const mailOptions = {
-            from: `"Telugu Info Support" <${process.env.EMAIL_USER1}>`,
+            from: `"Telugu Info Support" <${process.env.EMAIL_USER}>`,
             to: to,
             subject: subject,
             html: html,
