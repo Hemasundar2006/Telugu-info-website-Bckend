@@ -31,7 +31,8 @@ function isPublicRequest(method, url) {
     "/api/auth/login",
     "/api/auth/forgot-password",
     "/api/auth/reset-password",
-    "/api/courses" // allow public course creation
+    "/api/courses", // allow public course creation
+    "/api/feedback" // allow public feedback submission
   ];
   const publicGetOnly = [
     "/api/courses",
