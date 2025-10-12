@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Feedback = require('../models/Feedback');
-const { sendEmail } = require('../utils/sendEmail');
+const { sendEmail } = require('../config/emailConfig');
 
 // POST /api/feedback - Submit new feedback/testimonial
 router.post('/', async (req, res) => {
@@ -25,11 +25,18 @@ router.post('/', async (req, res) => {
             </div>
         `;
 
-        await sendEmail(
+        // Send thank you email with proper error handling
+        const emailResult = await sendEmail(
             req.body.email,
             'Thank You for Your Testimonial - Telugu Info',
+            `Thank you for your feedback, ${req.body.name}! Your testimonial has been added to our website.`,
             emailHtml
         );
+
+        if (!emailResult.success) {
+            console.error('Email sending failed:', emailResult.error);
+            // Don't fail the entire request if email fails, just log it
+        }
 
         res.status(201).json({ 
             message: 'Thank you for your feedback! Your testimonial has been added to our website.',
