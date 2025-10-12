@@ -66,4 +66,85 @@ router.get('/testimonials', async (req, res) => {
     }
 });
 
+// GET /api/feedback/counts - Get count of testimonials and ratings statistics
+router.get('/counts', async (req, res) => {
+    try {
+        // Get total count of testimonials
+        const totalTestimonials = await Feedback.countDocuments();
+        
+        // Get count of approved testimonials
+        const approvedTestimonials = await Feedback.countDocuments({ isApproved: true });
+        
+        // Get average rating
+        const ratingStats = await Feedback.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    averageRating: { $avg: '$rating' },
+                    totalRatings: { $sum: 1 },
+                    minRating: { $min: '$rating' },
+                    maxRating: { $max: '$rating' }
+                }
+            }
+        ]);
+
+        // Get rating distribution (count of each rating 1-5)
+        const ratingDistribution = await Feedback.aggregate([
+            {
+                $group: {
+                    _id: '$rating',
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $sort: { _id: 1 }
+            }
+        ]);
+
+        // Format rating distribution
+        const ratingBreakdown = {};
+        ratingDistribution.forEach(item => {
+            ratingBreakdown[`rating_${item._id}`] = item.count;
+        });
+
+        // Get recent testimonials count (last 30 days)
+        const thirtyDaysAgo = new Date();
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+        const recentTestimonials = await Feedback.countDocuments({
+            createdAt: { $gte: thirtyDaysAgo }
+        });
+
+        const stats = ratingStats[0] || {
+            averageRating: 0,
+            totalRatings: 0,
+            minRating: 0,
+            maxRating: 0
+        };
+
+        res.json({
+            success: true,
+            counts: {
+                totalTestimonials,
+                approvedTestimonials,
+                pendingTestimonials: totalTestimonials - approvedTestimonials,
+                recentTestimonials,
+                ratingStats: {
+                    averageRating: Math.round(stats.averageRating * 100) / 100, // Round to 2 decimal places
+                    totalRatings: stats.totalRatings,
+                    minRating: stats.minRating,
+                    maxRating: stats.maxRating
+                },
+                ratingDistribution: ratingBreakdown
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching testimonial counts:', error);
+        res.status(500).json({ 
+            message: 'Error fetching testimonial counts',
+            error: error.message,
+            success: false
+        });
+    }
+});
+
 module.exports = router;
