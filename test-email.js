@@ -5,119 +5,410 @@ async function testEmail() {
     
     // List of email recipients
     const recipients = [
-        
+      'marothihemasundar03@gmail.com',
+        'deepthideepu594@gmail.com',
+        'harijanasruthi69@gmail.com',
+        'butrabhavyasree810@gmail.com',
+        'lalearchana8838@gmail.com',
+        'varshinikotha04@gmail.com',
+        'sailajakavali88@gmail.com',
+        'angadidarshitha@gmail.com',
+        'devireddygnaneswarreddy@gmail.com',
+        'tejaswinikar30@gmail.com',
+        'himavarshini958@gmail.com',
+        '54suryaprakash54@gmail.com',
+        'luckysaiv497@gmail.com',
+        'akshayashok20045@gmail.com',
+        'ashmithtr78@gmail.com',
+        'vyshnavvijayan22@gmail.com',
+        'jerin3821@gmail.com',
+        'jeromebiju2003@gmail.com',
+        'lalvinvarghese41@gmail.com',
+        'kiranshijo79@gmail.com',
+        'archanarajendran0223@gmail.com',
+        'donalddevassykutty@gmail.com',
+        'basudav728@gmail.com',
+        'anjanaks9539@gmail.com',
+        'bbnaveenkumar51@gmail.com',
+        'challasaiswarup@gmail.com',
+        'arfiya424@gmail.com',
+        'tejam8600@gmail.com',
+        'malleshbalamallesh07@gmail.com',
+        'poojiputtaparthi@gmail.com',
+        'ukeerthana1212@gmail.com',
+        'rk4505228@gmail.com',
+        'mahimahi5323@gmail.com',
+        'meghamegha90884@gmail.com',
+        'maruthi4687@gmail.com',
+        'shailkirfan897720@gmail.com',
+        'veeraboinapavan4@gmail.com',
+        'gongativishnuvardhanr@gmail.com',
+        'koraganeshreddy@gmail.com',
+        'varunkumarreddybandi67@gmail.com',
+        'sweetkillersweetkillerdastagir@gmail.com',
+        'sivaanandreddy11@gmail.com',
+        'eharichandra510@gmail.com',
+        '22sajiyaec039@gmail.com',
+        'roshanrai8895155314@gmail.com',
+        'abintj2004@gmail.com',
+        'thomsonthomasp2004@gmail.com',
+        'midhulmartin10@gmail.com',
+        'athlvj03@gmail.com',
+        'anandhuharidas288@gmail.com',
+        'leonbenny776@gmail.com',
+        'hareeshkrishna2005@gmail.com',
+        'ajaykrishnan766@gmail.com',
+        'sreehariravi401@gmail.com',
+        'sanjoshajan095@gmail.com',
+        'amithkrishna17@gmail.com',
+        'dheerajcm31@gmail.com',
+        'anirudhtk85@gmail.com',
+        'ajmalpmgvr@gmail.com',
+        'akashpsatheesh562@gmail.com',
+        'sayanthck11@gmail.com',
+        'aryamuthara605@gmail.com',
+        'shithinms100@gmail.com',
+        'joyaljimmy04@gmail.com',
+        'alwynvarghese989@gmail.com',
+        'nsadithyansunil2005@gmail.com',
+        'sanjaykrishna7577@gmail.com',
+        'ebinkj013@gmail.com',
+        'jistogeorge31@gmail.com',
+        'biramalliumesa@gmail.com',
+        'suhailshakzz@gmail.com',
+        'adhiks.5453@gmail.com',
+        'tagoresai115@gmail.com',
+        'satyamchoudhary27102007@gmail.com',
+        'bodajayanthi0@gmail.com',
+        'aluruhaneef1@gmail.com',
+        'bogamanil69@gmail.com',
+        'navyamuntimadugu@gmail.com',
+        'divitithanuja@gmail.com',
+        'vinushayadav97@gmail.com',
+        'lavanyasake17@gmail.com',
+        'antonythomas3570@gmail.com',
+        'k.thanmaii007@gmail.com',
+        'kalaguriprasads@gmail.com',
+        'ganeshreddygandlapenta@gmail.com',
+        'potturupramod@gmail.com',
+        'jawlakarsushanth@gmail.com',
+        'jogannagariushausha@gmail.com',
+        'mulintynikitha@gmail.com',
+        'peramrenukareddy2006@gmail.com',
+        'sreenivasj467@gmail.com',
+        'pushparoyal431@gmail.com',
+        'kpallavireddy2007@gmail.com',
+        'janampallisadiya@gmail.com',
+        'reddyvinay6146@gmail.com',
+        'pamisettydevip@gmail.com',
+        'rdharanidharani51@gmail.com',
+        'somunemakallu2004@gmail.com',
+        'kiran778044@gmail.com',
+        'shaikarbaazsa29@gmail.com',
+        'sruthivenkata2007@gmail.com',
+        'jaswithapalyam@gmail.com',
+        'kaveriiragamreddy@gmail.com',
+        'chinnarajeswari66@gmail.com',
+        'kurubaraji2006@gmail.com',
+        'romanreignsrr120@gmail.com',
+        'kumarsravan57748@gmail.com',
+        'malleswarikovuri@gmail.com',
+        'n.madhavasai9@gmail.com',
+        'jakkalavadikisaiprathapreddy@gmail.com',
+        'harshithayadav834@gmail.com',
+        'ppraneeth054@gmail.com',
+        'shaktiprasad275@gmail.com',
+        'guttahasanthi@gmail.com',
+        'aluruhemanth505@gmail.com',
+        'mounikagopa2005@gmail.com',
+        'chinthakalyankumar8@gmai.com',
+        'kudannaikmahammadrafi@gmail.com',
+        'tharunnaik973@gmail.com',
+        'tarunabbineni@gmail.com',
+        'maheswarikuruva381@gmail.com',
+        'bhadrachinna333@gmail.com',
+        'yerukulamohan67@gmail.com',
+        'dvenkateshulu360@gmail.com',
+        'ramuanitha815@gmail.com',
+        'mnagabhushana22@gmail.com',
+        'ashokbejjala7@gmail.com',
+        'maithri.n06@gmail.com',
+        'suseelaamruthaboddhula@gmail.com',
+        'sankaranandakishore6300@gmail.com',
+        'sugunavarshitha2007@gmail.com',
+        'akshithaambakapalli@gmail.com',
+        'sonuangelsonu40@gmail.com',
+        'subahansubahan934@gmail.com',
+        'krishnachaitanyakrishna62@gmail.com',
+        'mufeedmufeed242@gmail.com',
+        'ssudharshanchinna@gmail.com',
+        'anjiediga2007@gmail.com',
+        'gorakatinavaneetha@gmail.com',
+        'vbhaskarvijayanagarambhaskar@gmail.com',
+        'mallikarjunat822@gmail.com',
+        'dudekularahim1234@gmail.com',
+        'manojm998554@gmail.com',
+        'mediumesh3333@gmail.com',
+        'nallamadakgghb@gmail.com',
+        'gnaneswar560@gmail.com',
+        'palegaranandhabhupathiraju09@gmail.com',
+        'nihalvn664@gmail.com',
+        'vidhusagar2@gmail.com',
+        'nikhiludhayan1903@gmail.com',
+        'sanjayodkr@gmail.com',
+        'jithinm25082002@gmail.com',
+        'riyan61riyan@gmail.com',
+        'ansif032@gmail.com',
+        'muhammedshafi22223@gmail.com',
+        'akshayonly9@gmail.com',
+        'muhammedshihab226688@gmail.com',
+        'sajin6111@gmail.com',
+        'gonehalmahesh000@gmail.com',
+        'royalmahidhar01@gmail.com',
+        'nshivakrishna01@gmail.com',
+        'sunnygaming955@gmail.com',
+        'pk5596594@gmail.com',
+        'joshvarithikpushparaj@gmail.com',
+        'naniakhil7860@gmail.com',
+        'rmanuraj3@gmail.com',
+        'manyapushpajan@gmail.com',
+        'alwinraphy999@gmail.com',
+        'mufeedmufe007@gmail.com',
+        'adharshmsadharshms733@gmail.com',
+        'akhilparthan2002@gmail.com',
+        'narayananasha25@gmail.com',
+        'ismailismail99551@gmail.com',
+        'muhammedshafeeku24@gmail.com',
+        'jephinaugustine18@gmail.com',
+        'stephin359@gmail.com',
+        'edwinraphel2005@gmail.com',
+        'ajuajumal78789878@gmail.com',
+        'amalnathpspuliyakode@gmail.com',
+        'siyadtk562003@gmail.com',
+        'resteenf@gmail.com',
+        'jerrinjoyson19@gmail.com',
+        'reddypraveenkumar92@gmail.com',
+        'marotinani06@gmail.com',
+        'nadimintihemalatha96@gmail.com',
+        'hemasaiamujuri3@gmail.com',
+        'marothihemasundar03@gmail.com',
+        'gireeshpurli@gmail.com',
+        'krishnaballanki69@gmail.com',
+        'podugucharan95@gmail.com',
+        'madabatthulasravanthrakesh@gmail.com',
+        'krishnavenigadi11@gmail.com',
+        'crvcrv114@gmail.com',
+        'ganapathipanchireddy0@gmail.com',
+        'kumarlikhith27@gmail.com',
+        'bangarujoes@gmail.com',
+        'teja2626swar@gmail.com',
+        'pradeep@gmail.com',
+        'chintadaprasad12@gmail.com',
+        'sravyasrimusirana@gmail.com',
+        'sravankoncha@gmail.com',
+        'sathwik333chand@gmail.com',
+        'bandarumadhuri32@gmail.com',
+        'ponnanahema@gmail.com',
+        'rameshstudy1234@gmail.com',
+        'kundrapukumarswamy74@gmail.com',
+        'naravadilleswararao1315@gmail.com',
+        'podugucharan81@gmail.com',
+        'rajitha9410@gmail.com',
+        'sairutwik1123@gmail.com',
+        'adinigowthami@gmail.com',
+        'sutarisuchitra141@gmail.com',
+        'mohansivaram2007@gmail.com',
+        'narayanamurthykarnayana@gmail.com',
+        'hemasundarmaroti@gmail.com',
+        'hmmhmm@gmail.com',
+        'sadfsafd@gmail.com',
+        'shanmukharaoadapaka123@gmail.com',
+        'akashvenkat4454@gmail.com',
+        'tmgcewziubpoqwq@suiemail.com',
+        'notforuse982@gmail.com',
+        'hiteshganni007@gmail.com',
+        'sam0cypher@gmail.com',
+        'kiransomulakiran@gmail.com',
+        'gptgamerz51@gmail.com',
+        'jamisabareesh74@gmail.com',
+        'lohithvasantha50@gmail.com',
+        'deepikajagarana2007@gmail.com',
+        'moditeja029@gmail.com',
+        'gopal.antyakula19@gmail.com',
+        'marotikesava@gmail.com',
+        'teja4028@gmail.com',
+        'abhichichulla@gmail.com',
+        'dasarimaneesha91@gmail.com',
+        'krishnaballanki472@gmail.com',
+        'kummaritirupathi8@gmail.com',
+        'mrroodboy1@gmail.com',
+        'ananthasaiananthasai40@gmail.com',
+        'chirikikishorkumar@gmail.com',
+        'gowthamiec020@gmail.com',
+        'rohithvarri98@gmail.com',
+        'umashankarnaidu71@gmail.com',
+        'kick@123gmail.com',
+        'ricky27333@gmail.com',
+        'shaikkarimulla2438@gmail.com',
+        'vyaswanth183@gmail.com',
+        'Ponnadathanuja691@gmail.com',
+        'jahnavi@2008gmail.com',
+        'mysterioustruths23@gmail.com',
+        'ethicalhacker3568@gmail.com',
+        'thatigouthami95@gmail.com',
+        'sumiyonukonduri@gmail.com',
+        'jayashreenaidu04@gmail.com',
+        'manichindiri@gmail.com',
+        'magesh12092004@gmail.com',
+        'vajjathanuja@gmail.com',
+        'himahasini.kallepalli@gmail.com',
+        'gowthamkalahasti@gmail.com',
+        'nadimintihemalatha7@gmail.com',
+        'sudarsanpalavalasa@gmail.com',
+        'mahalakshmikonna365@gmail.com',
+        'saichandubondala9177@gmail.com',
+        '21065chb@gmail.com',
+        'saitrinadhh@gmail.com',
+        'naveenallu.2008@gmail.com',
+        'harikagummadi360@gmail.com',
+        'lakshmivangapandu88@gmail.com',
+        'smilykingtejasaikumar@gmail.com',
+        'yamunathuta1@gmail.com',
+        'jyothsnapatnana@gmail.com',
+        'mahavumatha@gmail.com',
+        'pogirihari617@gmail.com',
     ];
 
-    console.log(`Sending RRB Technician Recruitment 2025 notification emails to recipients...`);
+    console.log(`Sending Telugu Info welcome emails to recipients...`);
 
     // Email content
-    const subject = '🚆 RRB Technician Recruitment 2025 – 6180 Vacancies | Apply Before 28th July!';
+    const subject = '📢 Join Telugu Info - Get Daily Job Updates & Career Guidance!';
     
 
-    const text = `Dear Telugu Info Community Member ,
+    const text = `Hello!
 
-We are excited to share a major job opportunity from the Indian Railways! 🚨
+Are you looking for job opportunities and career guidance? Join Telugu Info today!
 
-The Railway Recruitment Board (RRB) has officially released the RRB Technician Notification 2025 through the Employment Newspaper. This year, 6180 vacancies have been announced:
+WHAT WE OFFER:
+→ Daily Job Updates (Govt & Private)
+→ Free Study Materials
+→ Scholarship Alerts
+→ Career Guidance
+→ Interview Tips
+→ Exam Notifications
 
-👷‍♂️ Technician Grade 1 Signal – 180 posts  
-🛠️ Technician Grade 3 – 6000 posts  
+JOIN OUR COMMUNITY:
+WhatsApp: Scan the QR code in the HTML version of this email or click here:
+https://whatsapp.com/channel/0029Vb7K4xO1noz27fvVPG28
 
-Important Dates:
-- Apply Online: 28th June 2025  
-- Last Date to Apply: 28th July 2025 (11:59 PM)  
-- Fee Payment Deadline: 28th July 2025
+MANDATORY: After joining the WhatsApp channel, please create your account on our website.
+Create your account: https://telugu-info.vercel.app
 
-Eligibility:
-- Grade 1 Signal: B.Sc. or Diploma/Degree in Engineering  
-- Grade 3: Matric/SSLC + ITI or Act Apprenticeship
+Website: https://telugu-info.vercel.app
+Instagram: https://www.instagram.com/mr_mca_00
+Facebook: https://www.facebook.com/profile.php?id=100088840030113
+LinkedIn: https://www.linkedin.com/in/hemasundar-maroti
 
-Application Fee:
-- SC/ST/Female/EWS/PwD: ₹250 (refundable after CBT)  
-- General/OBC: ₹500 (₹400 refundable after CBT)
+WHY TELUGU INFO?
+• 100% Verified Information
+• Daily Updates
+• Free Access
+• Quick Support
+• User-Friendly Platform
+• Active Community
 
-Selection Process:
-1. Computer-Based Test (CBT)
-2. Document Verification
-3. Medical Examination
+Don't wait! Join 10,000+ members already benefiting from our services.
 
-Salary:
-- Grade 1 Signal – ₹29,200/month  
-- Grade 3 – ₹19,900/month
-
-Apply Now: https://www.rrbcdg.gov.in
-
-Don’t miss this opportunity to work with Indian Railways.
+Need help? Contact us:
+📞 +91 7036180813
+📧 marotinani06@gmail.com
 
 Best regards,  
 Telugu Info Team`;
 
 
 const html = `
-<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; background: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-  <div style="text-align: center; background: linear-gradient(135deg, #1565c0, #1e88e5); color: white; padding: 24px; border-radius: 8px;">
-    <h2 style="margin: 0;">🚆 RRB Technician Recruitment 2025</h2>
-    <p style="font-size: 16px;">6180 Vacancies | Apply Before 28th July</p>
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px;">
+  <div style="background: #1a237e; color: white; padding: 30px; text-align: center; border-radius: 10px;">
+    <h1 style="margin: 0; font-size: 28px;">📢 Join Telugu Info Today!</h1>
+    <p style="margin: 10px 0 0; font-size: 18px;">Get Daily Job Updates & Career Guidance</p>
   </div>
 
-    <div style="text-align: center; margin-bottom: 20px;">
-    <img src="https://www.careerpower.in/blog/wp-content/uploads/2025/06/16143004/rrb-technician.webp" alt="RRB Technician Recruitment Banner" style="max-width: 100%; border-radius: 8px;">
+  <div style="margin: 30px 0; font-size: 16px; line-height: 1.5;">
+    <p style="font-size: 18px; font-weight: bold; color: #1a237e;">Looking for job opportunities and career guidance?</p>
+    <p>Join our growing community of 10,000+ members!</p>
   </div>
   
-
-  <div style="padding: 20px; line-height: 1.6; color: #333;">
-    <p>Dear <strong>Telugu Info Community Member</strong>,</p>
-    <p>We are excited to share a major job opportunity from the Indian Railways! 🚨</p>
-
-    <h4>📌 Vacancies:</h4>
-    <ul>
-      <li>👷‍♂️ <strong>Technician Grade 1 Signal</strong> – 180 posts</li>
-      <li>🛠️ <strong>Technician Grade 3</strong> – 6000 posts</li>
-    </ul>
-
-    <h4>🗓️ Important Dates:</h4>
-    <ul>
-      <li><strong>Apply Online:</strong> 28th June 2025</li>
-      <li><strong>Last Date to Apply:</strong> 28th July 2025 (11:59 PM)</li>
-      <li><strong>Fee Payment Deadline:</strong> 28th July 2025</li>
-    </ul>
-
-    <h4>🎓 Eligibility:</h4>
-    <ul>
-      <li><strong>Grade 1 Signal:</strong> B.Sc. or Diploma/Degree in Engineering</li>
-      <li><strong>Grade 3:</strong> Matric/SSLC + ITI or Act Apprenticeship</li>
-    </ul>
-
-    <h4>💰 Application Fee:</h4>
-    <ul>
-      <li><strong>SC/ST/Female/EWS/PwD:</strong> ₹250 (refundable after CBT)</li>
-      <li><strong>General/OBC:</strong> ₹500 (₹400 refundable after CBT)</li>
-    </ul>
-
-    <h4>🧾 Selection Process:</h4>
-    <ol>
-      <li>Computer-Based Test (CBT)</li>
-      <li>Document Verification</li>
-      <li>Medical Examination</li>
-    </ol>
-
-    <h4>💼 Salary:</h4>
-    <ul>
-      <li><strong>Grade 1 Signal:</strong> ₹29,200/month</li>
-      <li><strong>Grade 3:</strong> ₹19,900/month</li>
-    </ul>
-
-    <p style="margin-top: 20px; text-align: center;">
-      👉 <a href="https://www.rrbcdg.gov.in" style="background: #388e3c; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">Apply Now</a>
-    </p>
-
-    <p style="margin-top: 30px;">Don’t miss this opportunity to build a career with Indian Railways. Prepare well and apply before the deadline!</p>
+  <div style="background: #f5f5f5; padding: 20px; border-radius: 10px; margin: 20px 0;">
+    <h2 style="color: #1a237e; margin-top: 0;">What We Offer:</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+      <div style="background: white; padding: 15px; border-radius: 8px;">
+        <p style="margin: 0;">→ Daily Job Updates</p>
+      </div>
+      <div style="background: white; padding: 15px; border-radius: 8px;">
+        <p style="margin: 0;">→ Free Study Materials</p>
+      </div>
+      <div style="background: white; padding: 15px; border-radius: 8px;">
+        <p style="margin: 0;">→ Scholarship Alerts</p>
+      </div>
+      <div style="background: white; padding: 15px; border-radius: 8px;">
+        <p style="margin: 0;">→ Career Guidance</p>
+      </div>
+      <div style="background: white; padding: 15px; border-radius: 8px;">
+        <p style="margin: 0;">→ Interview Tips</p>
+      </div>
+      <div style="background: white; padding: 15px; border-radius: 8px;">
+        <p style="margin: 0;">→ Exam Notifications</p>
+      </div>
+    </div>
   </div>
 
-  <div style="text-align: center; font-size: 14px; color: #666; border-top: 1px solid #ddd; padding-top: 20px;">
-    Warm regards,<br>
-    <strong>Telugu Info Team</strong><br>
-    📧 marotinani06@gmail.com | 🌐 https://telugu-info.vercel.app/ | 📞 917036180813
+  <div style="background: #25D366; color: white; padding: 20px; border-radius: 10px; text-align: center; margin: 20px 0;">
+    <h2 style="margin-top: 0;">Join Our WhatsApp Channel</h2>
+    <p style="margin: 10px 0;">Scan QR Code to Join!</p>
+    <div style="background: white; padding: 20px; border-radius: 10px; display: inline-block; margin: 15px 0;">
+      <img src="https://i.ibb.co/wNn7jsfy/IMG-20251013-113642.jpg" alt="Telugu Info WhatsApp Channel QR Code" style="width: 200px; height: 200px; display: block; margin: 0 auto;">
+    </div>
+    <p style="margin: 10px 0;">Or click the button below</p>
+    <a href="https://whatsapp.com/channel/0029Vb7K4xO1noz27fvVPG28" 
+       style="background: white; color: #25D366; padding: 12px 25px; text-decoration: none; border-radius: 25px; display: inline-block; font-weight: bold; margin-top: 10px;">
+       Join WhatsApp Channel →
+    </a>
+    <div style="background:#fff3cd; color:#856404; padding:16px; border-radius:8px; margin-top:16px;">
+      <strong>Important:</strong> After joining our WhatsApp channel, please create your account on our website to get personalized alerts and save your preferences.
+      <div style="margin-top:12px;">
+        <a href="https://telugu-info.vercel.app" style="background:#1a237e; color:#ffffff; padding:10px 18px; text-decoration:none; border-radius:6px; font-weight:bold;">Create your account</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin: 30px 0; text-align: center;">
+    <h2 style="color: #1a237e;">Connect With Us</h2>
+    <div style="margin: 20px 0;">
+      <a href="https://telugu-info.vercel.app" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #1a237e; color: white; text-decoration: none; border-radius: 5px;">🌐 Website</a>
+      <a href="https://www.instagram.com/mr_mca_00" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #E4405F; color: white; text-decoration: none; border-radius: 5px;">📸 Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=100088840030113" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #1877F2; color: white; text-decoration: none; border-radius: 5px;">👥 Facebook</a>
+      <a href="https://www.linkedin.com/in/hemasundar-maroti" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #0077B5; color: white; text-decoration: none; border-radius: 5px;">💼 LinkedIn</a>
+    </div>
+  </div>
+
+  <div style="background: #f5f5f5; padding: 20px; border-radius: 10px; margin: 20px 0;">
+    <h2 style="color: #1a237e; margin-top: 0;">Why Choose Telugu Info?</h2>
+    <ul style="list-style-type: none; padding: 0; margin: 0;">
+      <li style="padding: 10px; background: white; margin: 5px 0; border-radius: 5px;">• 100% Verified Information</li>
+      <li style="padding: 10px; background: white; margin: 5px 0; border-radius: 5px;">• Daily Updates</li>
+      <li style="padding: 10px; background: white; margin: 5px 0; border-radius: 5px;">• Free Access</li>
+      <li style="padding: 10px; background: white; margin: 5px 0; border-radius: 5px;">• Quick Support</li>
+      <li style="padding: 10px; background: white; margin: 5px 0; border-radius: 5px;">• User-Friendly Platform</li>
+    </ul>
+  </div>
+
+  <div style="text-align: center; margin-top: 30px; padding: 20px; background: #1a237e; color: white; border-radius: 10px;">
+    <h2 style="margin-top: 0;">Contact Us</h2>
+    <p style="margin: 10px 0;">
+      📞 <a href="tel:+917036180813" style="color: white; text-decoration: none;">+91 7036180813</a><br>
+      📧 <a href="mailto:marotinani06@gmail.com" style="color: white; text-decoration: none;">marotinani06@gmail.com</a>
+    </p>
   </div>
 </div>`;
 

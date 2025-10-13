@@ -125,17 +125,20 @@ router.post('/register', async (req, res) => {
                 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
                     <h3 style="color: #2c3e50; margin-top: 0;">Join Our WhatsApp Channel</h3>
                     <p style="font-size: 16px; line-height: 1.6;">Get instant updates and stay connected with our community:</p>
-                    <p style="font-size: 16px; line-height: 1.6;"><a href="https://whatsapp.com/channel/0029Va9UwjB6HXUNjS0Sf43L" style="color: #007bff; text-decoration: none;">Join WhatsApp Channel →</a></p>
+                    <p style="font-size: 16px; line-height: 1.6;"><a href="https://whatsapp.com/channel/0029Vb7K4xO1noz27fvVPG28" style="color: #007bff; text-decoration: none;">Join WhatsApp Channel →</a></p>
                 </div>
                 <p style="font-size: 16px; line-height: 1.6;">Best regards,<br>The Telugu Info Team</p>
             </div>
         `;
 
-        try {
-            await sendEmail(data.email, subject, text, html);
-        } catch (emailError) {
-            console.error('Failed to send welcome email:', emailError);
-            // Don't fail the registration if email fails
+        // Send welcome email with proper error handling
+        const emailResult = await sendEmail(data.email, subject, text, html);
+        if (!emailResult.success) {
+            console.error('Failed to send welcome email:', emailResult.error);
+            // Log the error but don't fail registration
+            // You might want to implement a retry mechanism or queue here
+        } else {
+            console.log('Welcome email sent successfully to:', data.email);
         }
 
         return res.status(200).json({ success : true , data : document})
