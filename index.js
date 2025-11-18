@@ -5,6 +5,7 @@ const mainRouter = require("./src/routers/router");
 const emailRouter = require("./src/routers/emailRouter");
 const http = require("http");
 const cors = require('cors');
+const authRoutes = require("./src/routes/authRoutes");
 
 var PORT = process.env.PORT || 4000;
 connectdb();
@@ -12,13 +13,31 @@ const app = express();
 const server = require("http").createServer(app);
 
 // Enable CORS for all routes
+// Add proper CORS configuration
+const whitelist = [
+    process.env.FRONTEND_URL,
+    'http://localhost:3000',
+    'https://telugu-info.vercel.app'
+];
+
 app.use(cors({
-    origin: '*', // Allow all origins during development
+    origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+    allowedHeaders: [
+        'Content-Type',
+        'Authorization',
+        'X-Requested-With',
+        'Accept'
+    ],
     exposedHeaders: ['Content-Range', 'X-Content-Range'],
     credentials: true,
-    maxAge: 86400 // 24 hours
+    maxAge: 86400
 }));
 
 // Handle preflight requests
@@ -32,7 +51,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", mainRouter);
 app.use("/api/email", emailRouter);
-
+app.use("/api/auth", authRoutes);
 // azureOpenAi();
 // openAiWithAzureKeys();
 
@@ -45,6 +64,7 @@ app.use((err, req, res, next) => {
         error: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
 });
+
 
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

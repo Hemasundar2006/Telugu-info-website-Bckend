@@ -1,29 +1,38 @@
 const mongoose = require('mongoose');
 
 const feedbackSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
     email: {
         type: String,
         required: true,
         trim: true
     },
-    careerTipsRating: {
+    rating: {
         type: Number,
         required: true,
         min: 1,
         max: 5
     },
-    jobRelevance: {
+    testimonial: {
         type: String,
         required: true,
-        enum: ['Very Relevant', 'Somewhat Relevant', 'Not Relevant']
+        trim: true
     },
-    topicsOfInterest: {
-        type: String,
-        required: true
-    },
-    additionalComments: {
+    occupation: {
         type: String,
         trim: true
+    },
+    location: {
+        type: String,
+        trim: true
+    },
+    isApproved: {
+        type: Boolean,
+        default: true  // Changed to true for auto-approval
     },
     createdAt: {
         type: Date,
@@ -31,4 +40,4 @@ const feedbackSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Feedback', feedbackSchema); 
+module.exports = mongoose.model('Feedback', feedbackSchema);

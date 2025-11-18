@@ -2,21 +2,104 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const userDB = require('../../models/user/user');
 const { sendEmail } = require('../../config/emailConfig');
+const crypto = require('crypto');
 
 const router = express.Router();
 
 const saltRounds = 10;
 
+// Middleware to check if user is admin
+const isAdmin = async (req, res, next) => {
+    try {
+        const userId = req.headers['user-id'];
+        if (!userId) {
+            return res.status(401).json({ success: false, message: 'Authentication required' });
+        }
+
+        const user = await userDB.findById(userId);
+        if (!user || user.role !== 'admin') {
+            return res.status(403).json({ success: false, message: 'Admin access required' });
+        }
+
+        next();
+    } catch (err) {
+        return res.status(500).json({ success: false, message: err.message });
+    }
+};
+
+// Get all users (admin only)
+router.get('/all', isAdmin, async (req, res) => {
+    try {
+        const users = await userDB.find({ isDeleted: false })
+            .select('-password') // Exclude password field
+            .sort({ createdAt: -1 }); // Sort by newest first
+
+        return res.status(200).json({
+            success: true,
+            data: users,
+            total: users.length
+        });
+    } catch (err) {
+        console.error('Error fetching users:', err);
+        return res.status(500).json({ success: false, message: err.message });
+    }
+});
 
 router.post('/register', async (req, res) => {
     const data = req.body;
 
     try {
+        // Check if user already exists
         const user = await userDB.findOne({ email : data.email });
         if (user) {
             return res.status(400).json({ Success : false , message : 'User already exists please log in' });
         }
 
+        // Validate required fields
+        if (!data.name || !data.email || !data.password) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Name, email, and password are required fields' 
+            });
+        }
+
+        // Validate gender if provided
+        if (data.gender && !["male", "female"].includes(data.gender)) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Gender must be either "male" or "female"' 
+            });
+        }
+
+        // Validate mobile number format if provided
+        if (data.mobile) {
+            const mobileRegex = /^[0-9]{10}$/;  // Assumes 10-digit mobile number
+            if (!mobileRegex.test(data.mobile)) {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: 'Mobile number must be 10 digits' 
+                });
+            }
+        }
+
+        // Role validation
+        if (data.role === 'admin') {
+            // Check if request is from an admin
+            const adminId = req.headers['user-id'];
+            if (!adminId) {
+                return res.status(403).json({ success: false, message: 'Admin access required to create admin users' });
+            }
+
+            const adminUser = await userDB.findById(adminId);
+            if (!adminUser || adminUser.role !== 'admin') {
+                return res.status(403).json({ success: false, message: 'Only admins can create other admin users' });
+            }
+        } else {
+            // For non-admin registrations, ensure role is 'user'
+            data.role = 'user';
+        }
+
+        // Hash password
         data.password = await bcrypt.hash(data.password, saltRounds);
 
         // Create new user
@@ -42,17 +125,20 @@ router.post('/register', async (req, res) => {
                 <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin: 20px 0;">
                     <h3 style="color: #2c3e50; margin-top: 0;">Join Our WhatsApp Channel</h3>
                     <p style="font-size: 16px; line-height: 1.6;">Get instant updates and stay connected with our community:</p>
-                    <p style="font-size: 16px; line-height: 1.6;"><a href="https://whatsapp.com/channel/0029Va9UwjB6HXUNjS0Sf43L" style="color: #007bff; text-decoration: none;">Join WhatsApp Channel →</a></p>
+                    <p style="font-size: 16px; line-height: 1.6;"><a href="https://whatsapp.com/channel/0029Vb7K4xO1noz27fvVPG28" style="color: #007bff; text-decoration: none;">Join WhatsApp Channel →</a></p>
                 </div>
                 <p style="font-size: 16px; line-height: 1.6;">Best regards,<br>The Telugu Info Team</p>
             </div>
         `;
 
-        try {
-            await sendEmail(data.email, subject, text, html);
-        } catch (emailError) {
-            console.error('Failed to send welcome email:', emailError);
-            // Don't fail the registration if email fails
+        // Send welcome email with proper error handling
+        const emailResult = await sendEmail(data.email, subject, text, html);
+        if (!emailResult.success) {
+            console.error('Failed to send welcome email:', emailResult.error);
+            // Log the error but don't fail registration
+            // You might want to implement a retry mechanism or queue here
+        } else {
+            console.log('Welcome email sent successfully to:', data.email);
         }
 
         return res.status(200).json({ success : true , data : document})
